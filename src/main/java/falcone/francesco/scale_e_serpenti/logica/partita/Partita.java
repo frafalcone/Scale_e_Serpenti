@@ -1,0 +1,96 @@
+package falcone.francesco.scale_e_serpenti.logica.partita;
+
+import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
+import falcone.francesco.scale_e_serpenti.logica.impostazioni.ImpostazioniCaselle;
+import falcone.francesco.scale_e_serpenti.logica.impostazioni.ImpostazioniGiocatori;
+import falcone.francesco.scale_e_serpenti.logica.impostazioni.ImpostazioniRegole;
+import falcone.francesco.scale_e_serpenti.logica.impostazioni.ImpostazioniTabellone;
+import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneBuilder;
+import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneBuilderDirector;
+import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneBuilderIF;
+import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneIF;
+import falcone.francesco.scale_e_serpenti.logica.turno.SelettoreSistemaTurni;
+import falcone.francesco.scale_e_serpenti.logica.turno.TurnoIF;
+
+public class Partita {
+
+    private static Partita instance;
+
+    private ImpostazioniRegole impostazioniRegole;
+    private ImpostazioniCaselle impostazioniCaselle;
+    private ImpostazioniTabellone impostazioniTabellone;
+    private ImpostazioniGiocatori impostazioniGiocatori;
+    private TabelloneIF tabellone;
+    private TurnoIF sistemaTurni;
+
+    private Partita(){
+    }
+
+    public static Partita getPartita(){
+        if(instance == null) instance = new Partita();
+        return instance;
+    }
+
+    public void inizializzaPartita(){
+        impostazioniTabellone = new ImpostazioniTabellone();
+        impostazioniCaselle = new ImpostazioniCaselle();
+        impostazioniRegole = new ImpostazioniRegole();
+        impostazioniGiocatori = new ImpostazioniGiocatori();
+    }
+
+    public void creaPartita(){
+        /*
+        Sequenza di I/O per abilitare/disabilitare le varie impostazioni;
+        */
+
+        sistemaTurni = new SelettoreSistemaTurni().seleziona(impostazioniRegole);
+
+        TabelloneBuilderIF builder = new TabelloneBuilder();
+        TabelloneBuilderDirector director = new TabelloneBuilderDirector(builder);
+        director.build(impostazioniCaselle, impostazioniTabellone);
+        tabellone = builder.getTabellone();
+    }
+
+    public void salvaPartita(){
+        /*
+        scrittura delle variabili su file ".save" delle varie impostazioni, tramite i metodi di get;
+         */
+    }
+
+    public void caricaPartita(){
+        /*
+        lettura delle variabili da file ".save" delle varie impostazioni, tramite i metodi di set;
+         */
+
+        sistemaTurni = new SelettoreSistemaTurni().seleziona(impostazioniRegole);
+
+        TabelloneBuilderIF builder = new TabelloneBuilder();
+        TabelloneBuilderDirector director = new TabelloneBuilderDirector(builder);
+        director.build(impostazioniCaselle, impostazioniTabellone);
+        tabellone = builder.getTabellone();
+
+        sistemaTurni.setTabellone(tabellone);
+    }
+
+    public void svolgiTurno(Giocatore giocatore){
+        if(sistemaTurni.getAutomatizza()){
+            /*
+            Avanzamento automatico del turno;
+             */
+        }
+        else {
+            /*
+            Avanzamento manuale del turno
+             */
+        }
+    }
+
+    public void gameLoop(){
+        //Controllo delle condizioni di vittoria
+        //Controllare il settaggio dell'automatizzazione
+        //Calcolare il turno
+        //Calcolare il giocatore attivo nel turno
+        //Svolgere il turno
+        //Aggiornare le condizioni di vittoria e variabili per il turno successivo
+    }
+}
