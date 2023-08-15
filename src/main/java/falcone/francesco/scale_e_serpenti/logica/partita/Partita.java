@@ -75,19 +75,6 @@ public class Partita {
         sistemaTurni.setTabellone(tabellone);
     }
 
-    public void svolgiTurno(Giocatore giocatore){
-        if(sistemaTurni.getAutomatizza()){
-            /*
-            Avanzamento automatico del turno;
-             */
-        }
-        else {
-            /*
-            Avanzamento manuale del turno
-             */
-        }
-    }
-
 
     public void gameInitAndLoop(){
 
@@ -103,6 +90,13 @@ public class Partita {
         int indiceVincitore = -1;
 
         while(finito){
+
+            if(sistemaTurni.getAutomatizza()){
+                //Avanzamento Automatico
+            } else {
+                //Avanzamento Manuale
+            }
+
             int indiceGiocatoreAttuale = turno % impostazioniGiocatori.getNumeroGiocatori();
             Giocatore giocatoreAttuale = giocatori[indiceGiocatoreAttuale];
 
