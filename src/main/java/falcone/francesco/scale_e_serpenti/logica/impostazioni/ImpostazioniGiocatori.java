@@ -8,7 +8,7 @@ public class ImpostazioniGiocatori {
         numeroGiocatori = 0;
     }
 
-    public int numeroGiocatori() {
+    public int getNumeroGiocatori() {
         return numeroGiocatori;
     }
 

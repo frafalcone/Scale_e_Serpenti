@@ -4,8 +4,11 @@ import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
 
 public class CasellaScala extends CasellaDecorator{
 
-    public CasellaScala(CasellaIF casellaAssegnata){
+    private int destinazione;
+
+    public CasellaScala(CasellaIF casellaAssegnata, int destinazione){
         super(casellaAssegnata);
+        this.destinazione = destinazione;
     }
 
     @Override
@@ -15,6 +18,8 @@ public class CasellaScala extends CasellaDecorator{
     }
 
     private void comportamentoAggiunto(Giocatore giocatore) {
+        giocatore.setPosizione(destinazione);
     }
+
 
 }

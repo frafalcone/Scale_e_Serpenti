@@ -2,9 +2,9 @@ package falcone.francesco.scale_e_serpenti.logica.caselle;
 
 import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
 
-public class CasellaMolla extends CasellaDecorator{
+public class CasellaTraguardo extends CasellaDecorator{
 
-    public CasellaMolla(CasellaIF casellaAssegnata){
+    public CasellaTraguardo(CasellaIF casellaAssegnata){
         super(casellaAssegnata);
     }
 
@@ -15,7 +15,7 @@ public class CasellaMolla extends CasellaDecorator{
     }
 
     private void comportamentoAggiunto(Giocatore giocatore) {
-        giocatore.setMolla(true);
+        giocatore.setHaVinto(true);
     }
 
 }

@@ -1,5 +1,6 @@
 package falcone.francesco.scale_e_serpenti.logica.partita;
 
+import falcone.francesco.scale_e_serpenti.logica.caselle.CasellaPescaUnaCartaMod;
 import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
 import falcone.francesco.scale_e_serpenti.logica.impostazioni.ImpostazioniCaselle;
 import falcone.francesco.scale_e_serpenti.logica.impostazioni.ImpostazioniGiocatori;
@@ -43,12 +44,12 @@ public class Partita {
         Sequenza di I/O per abilitare/disabilitare le varie impostazioni;
         */
 
-        sistemaTurni = new SelettoreSistemaTurni().seleziona(impostazioniRegole);
-
         TabelloneBuilderIF builder = new TabelloneBuilder();
         TabelloneBuilderDirector director = new TabelloneBuilderDirector(builder);
         director.build(impostazioniCaselle, impostazioniTabellone);
         tabellone = builder.getTabellone();
+
+        sistemaTurni = new SelettoreSistemaTurni().seleziona(impostazioniRegole, tabellone);
     }
 
     public void salvaPartita(){
@@ -85,12 +86,46 @@ public class Partita {
         }
     }
 
-    public void gameLoop(){
-        //Controllo delle condizioni di vittoria
-        //Controllare il settaggio dell'automatizzazione
-        //Calcolare il turno
-        //Calcolare il giocatore attivo nel turno
-        //Svolgere il turno
-        //Aggiornare le condizioni di vittoria e variabili per il turno successivo
+
+    public void gameInitAndLoop(){
+
+        boolean finito = false;
+        int turno = 0;
+
+        Giocatore giocatori[] = new Giocatore[impostazioniGiocatori.getNumeroGiocatori()];
+
+        for(int i=0; i<impostazioniGiocatori.getNumeroGiocatori(); i++){
+            giocatori[i] = new Giocatore();
+        }
+
+        int indiceVincitore = -1;
+
+        while(finito){
+            int indiceGiocatoreAttuale = turno % impostazioniGiocatori.getNumeroGiocatori();
+            Giocatore giocatoreAttuale = giocatori[indiceGiocatoreAttuale];
+
+            if(giocatoreAttuale.getAttesa()<=0){
+                sistemaTurni.esegui(giocatoreAttuale);
+
+                if(giocatoreAttuale.getUsatoDivietoSosta()){
+                    CasellaPescaUnaCartaMod.riconsegnaDivietoSosta(giocatoreAttuale);
+                }
+
+                giocatoreAttuale.setMolla(false);
+                giocatoreAttuale.setRigioca(false);
+
+                if(giocatoreAttuale.getHaVinto()){
+                    indiceVincitore = indiceGiocatoreAttuale;
+                    finito = true;
+                }
+            }
+
+            else {
+                giocatoreAttuale.setAttesa(giocatoreAttuale.getAttesa()-1);
+            }
+
+            turno++;
+        }
+
     }
 }

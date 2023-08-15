@@ -8,4 +8,5 @@ public interface CasellaIF {
     public int getIndiceCasella();
     public void setAssegnata(boolean assegnata);
     public void setIndiceCasella(int indice);
+
 }

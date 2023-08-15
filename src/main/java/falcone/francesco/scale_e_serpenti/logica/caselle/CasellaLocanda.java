@@ -15,6 +15,13 @@ public class CasellaLocanda extends CasellaDecorator{
     }
 
     private void comportamentoAggiunto(Giocatore giocatore) {
+        if(!giocatore.getPossiedeDivietoSosta()){
+            giocatore.setAttesa(1);
+        }
+        else{
+            giocatore.setPossiedeDivietoSosta(false);
+            giocatore.setUsatoDivietoSosta(true);
+        }
     }
 
 }

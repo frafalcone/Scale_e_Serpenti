@@ -7,6 +7,9 @@ public class Giocatore {
     private int attesa;
     private boolean possiedeDivietoSosta;
     private boolean rigioca;
+    private boolean haVinto;
+    private boolean molla;
+    private boolean usatoDivietoSosta;
 
     public Giocatore() {
         posizioneX = 0;
@@ -14,7 +17,9 @@ public class Giocatore {
         posizione = 0;
         attesa = 0;
         possiedeDivietoSosta = false;
+        usatoDivietoSosta = false;
         rigioca = false;
+        haVinto = false;
     }
 
 
@@ -38,8 +43,16 @@ public class Giocatore {
         return possiedeDivietoSosta;
     }
 
+    public boolean getMolla() {return molla;}
+
     public boolean getRigioca() {
         return rigioca;
+    }
+
+    public boolean getHaVinto() {return haVinto;}
+
+    public boolean getUsatoDivietoSosta() {
+        return usatoDivietoSosta;
     }
 
     public void setPosizione(int posizione) {
@@ -63,4 +76,12 @@ public class Giocatore {
     }
 
     public void setRigioca(boolean rigioca) {this.rigioca = rigioca;}
+
+    public void setHaVinto(boolean haVinto) {this.haVinto = haVinto;}
+
+    public void setMolla(boolean molla) {this.molla = molla;}
+
+    public void setUsatoDivietoSosta(boolean usato){
+        this.usatoDivietoSosta = usato;
+    }
 }

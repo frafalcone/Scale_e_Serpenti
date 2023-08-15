@@ -15,6 +15,7 @@ public class CasellaDadi extends CasellaDecorator{
     }
 
     private void comportamentoAggiunto(Giocatore giocatore) {
+        giocatore.setRigioca(true);
     }
 
 }
