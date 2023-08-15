@@ -44,12 +44,14 @@ public class Partita {
         Sequenza di I/O per abilitare/disabilitare le varie impostazioni;
         */
 
+        sistemaTurni = new SelettoreSistemaTurni().seleziona(impostazioniRegole);
+
         TabelloneBuilderIF builder = new TabelloneBuilder();
         TabelloneBuilderDirector director = new TabelloneBuilderDirector(builder);
         director.build(impostazioniCaselle, impostazioniTabellone);
         tabellone = builder.getTabellone();
 
-        sistemaTurni = new SelettoreSistemaTurni().seleziona(impostazioniRegole, tabellone);
+        sistemaTurni.setTabellone(tabellone);
     }
 
     public void salvaPartita(){

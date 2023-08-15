@@ -5,8 +5,8 @@ import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneIF;
 
 public class TurnoE extends TurnoAb{
 
-    protected TurnoE(TabelloneIF tabellone){
-        super(tabellone);
+    protected TurnoE(){
+        super();
     }
 
     public void esegui(Giocatore giocatore){
