@@ -5,7 +5,7 @@ import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneIF;
 
 public class SelettoreSistemaTurni {
 
-    public TurnoIF seleziona(ImpostazioniRegole impostazioniRegole, TabelloneIF tabellone) {
+    public TurnoIF seleziona(ImpostazioniRegole impostazioniRegole) {
 
         boolean dadoSingolo = impostazioniRegole.getDadoSingolo();
         boolean lancioSingolo = impostazioniRegole.getLancioSingolo();
@@ -14,19 +14,19 @@ public class SelettoreSistemaTurni {
         TurnoIF turnazione = null;
 
         if (!dadoSingolo && !lancioSingolo && !doppioSei) {
-            turnazione = new TurnoA(tabellone);
+            turnazione = new TurnoA();
         }
         if (dadoSingolo && !lancioSingolo && !doppioSei) {
-            turnazione = new TurnoB(tabellone);
+            turnazione = new TurnoB();
         }
         if (!dadoSingolo && lancioSingolo && !doppioSei) {
-            turnazione = new TurnoC(tabellone);
+            turnazione = new TurnoC();
         }
         if (!dadoSingolo && !lancioSingolo && doppioSei) {
-            turnazione = new TurnoD(tabellone);
+            turnazione = new TurnoD();
         }
         if (!dadoSingolo && lancioSingolo && doppioSei) {
-            turnazione = new TurnoE(tabellone);
+            turnazione = new TurnoE();
         }
 
         return turnazione;

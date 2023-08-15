@@ -10,8 +10,7 @@ public abstract class TurnoAb implements TurnoIF {
     private boolean automatizza;
     protected TabelloneIF tabellone;
 
-    protected TurnoAb(TabelloneIF tabellone){
-        this.tabellone = tabellone;
+    protected TurnoAb(){
         automatizza = false;
     }
 
