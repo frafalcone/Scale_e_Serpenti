@@ -8,4 +8,5 @@ public interface TabelloneIF {
     public int getRighe();
     public int getColonne();
     public int getDimensione();
+    public void setCasella(CasellaIF casella);
 }

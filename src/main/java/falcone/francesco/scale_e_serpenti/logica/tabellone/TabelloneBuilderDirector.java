@@ -15,6 +15,12 @@ public class TabelloneBuilderDirector {
 
         builder.buildBase(impostazioniTabellone);
 
+        builder.setTraguardo();
+
+        builder.buildSerpenti();
+
+        builder.buildScale();
+
         if(impostazioniCaselle.getCasellaPremio()){
             builder.buildCasellaPremio();
         }

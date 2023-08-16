@@ -8,9 +8,17 @@ import java.util.LinkedList;
 public class CasellaPescaUnaCartaMod extends CasellaDecorator{
 
     private static LinkedList<Integer> carte;
+    private static boolean creato = false;
 
     public CasellaPescaUnaCartaMod(CasellaIF casellaAssegnata){
         super(casellaAssegnata);
+        if(!creato)
+            creaMazzo();
+    }
+
+    public void creaMazzo(){
+        carte = new LinkedList<Integer>();
+
         for(int i=0; i<5; i++){
             carte.add(i);
             carte.add(i);
@@ -19,6 +27,7 @@ public class CasellaPescaUnaCartaMod extends CasellaDecorator{
         }
 
         Collections.shuffle(carte);
+        creato = true;
     }
 
     @Override

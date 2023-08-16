@@ -33,8 +33,9 @@ public abstract class TurnoAb implements TurnoIF {
         }
 
         if(giocatore.getPosizione()+risultatoDadi > tabellone.getDimensione()){
-            giocatore.setPosizione(giocatore.getPosizione()+((giocatore.getPosizione()+risultatoDadi)- tabellone.getDimensione()));
-            tabellone.getCasella(giocatore.getPosizione()).passaggio(giocatore);
+            int risultatoDadiAggiornato = (giocatore.getPosizione() + risultatoDadi) - tabellone.getDimensione();
+            giocatore.setPosizione((giocatore.getPosizione()-risultatoDadiAggiornato));
+            tabellone.getCasella((giocatore.getPosizione()-risultatoDadiAggiornato)).passaggio(giocatore);
         }
     }
 
