@@ -8,15 +8,18 @@ import java.util.LinkedList;
 public class CasellaPescaUnaCarta extends CasellaDecorator{
 
     private LinkedList<Integer> carte;
-    private boolean creato = false;
+    private static boolean creato = false;
 
     public CasellaPescaUnaCarta(CasellaIF casellaAssegnata){
         super(casellaAssegnata);
-        creaMazzo();
+        if(!creato){
+            creaMazzo();
+        }
+
     }
 
     public void creaMazzo(){
-        carte = new LinkedList<Integer>();
+        carte = new LinkedList<>();
 
         for(int i=0; i<5; i++){
             carte.add(i);
@@ -40,27 +43,23 @@ public class CasellaPescaUnaCarta extends CasellaDecorator{
         carte.removeFirst();
         carte.addLast(cartaPescata);
 
-        switch(cartaPescata){
-            case 0:
+        switch (cartaPescata) {
+            case 0 -> {
                 System.out.println("Giocatore pesca la carta: Dado;");
                 giocatore.setRigioca(true);
-                break;
-            case 1:
-                if(giocatore.getPossiedeDivietoSosta()){
-
-
-                }
+            }
+            case 1 -> {
                 System.out.println("Giocatore pesca la carta: Panchina;");
                 giocatore.setAttesa(1);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 System.out.println("Giocatore pesca la carta: Molla;");
                 giocatore.setMolla(true);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 System.out.println("Giocatore pesca la carta: Locanda;");
                 giocatore.setAttesa(3);
-                break;
+            }
         }
     }
 

@@ -33,8 +33,8 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
         Random random = new Random();
 
         while (numeroSerpenti>0){
-            int indiceTestaSerpente = -1;
-            int indiceCodaSerpente = -1;
+            int indiceTestaSerpente;
+            int indiceCodaSerpente;
             boolean posizionato = false;
 
             while(!posizionato){
@@ -61,8 +61,8 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
         Random random = new Random();
 
         while (numeroScale>0){
-            int indiceBaseScala = -1;
-            int indiceFineScala = -1;
+            int indiceBaseScala;
+            int indiceFineScala;
             boolean posizionato = false;
 
             while(!posizionato){
@@ -96,7 +96,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
         Random random = new Random();
 
         while (numeroCaselleSosta>0){
-            int indiceCasella = -1;
+            int indiceCasella;
             boolean posizionato = false;
 
             while(!posizionato){
@@ -127,7 +127,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
         Random random = new Random();
 
         while (numeroCasellePremio>0){
-            int indiceCasella = -1;
+            int indiceCasella;
             boolean posizionato = false;
 
             while(!posizionato){
@@ -157,7 +157,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
         Random random = new Random();
 
         while (numeroCasellePescaUnaCarta>0){
-            int indiceCasella = -1;
+            int indiceCasella;
             boolean posizionato = false;
 
             while(!posizionato){
@@ -180,7 +180,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
         Random random = new Random();
 
         while (numeroCasellePescaUnaCarta>0){
-            int indiceCasella = -1;
+            int indiceCasella;
             boolean posizionato = false;
 
             while(!posizionato){

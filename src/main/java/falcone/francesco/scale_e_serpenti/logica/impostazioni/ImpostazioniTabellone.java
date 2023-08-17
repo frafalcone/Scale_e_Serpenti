@@ -47,9 +47,8 @@ public class ImpostazioniTabellone {
         this.colonne = colonne;
     }
 
-    public ImpostazioniTabellone setNumeroSerpenti(int numeroSerpenti) {
+    public void setNumeroSerpenti(int numeroSerpenti) {
         this.numeroSerpenti = numeroSerpenti;
-        return this;
     }
 
     public void setNumeroCasellePescaUnaCarta(int numeroCasellePescaUnaCarta) {

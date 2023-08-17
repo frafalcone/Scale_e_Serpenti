@@ -323,6 +323,7 @@ public class Partita {
             else {
                 giocatoreAttuale.setAttesa(giocatoreAttuale.getAttesa()-1);
                 System.out.println("Giocatore deve attendere;\n");
+                System.out.println("----------------------------------------");
             }
 
             System.out.println("========================================");
@@ -338,8 +339,10 @@ public class Partita {
 
     private void gestioneAutomatizzazione() {
         if (sistemaTurni.getAutomatizza()) {
+            return;
             //Avanzamento Automatico
         } else {
+            return;
             //Avanzamento Manuale
         }
     }

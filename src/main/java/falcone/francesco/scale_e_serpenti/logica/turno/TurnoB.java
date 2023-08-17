@@ -1,7 +1,6 @@
 package falcone.francesco.scale_e_serpenti.logica.turno;
 
 import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
-import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneIF;
 
 public class TurnoB extends TurnoAb{
 

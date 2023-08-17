@@ -1,7 +1,6 @@
 package falcone.francesco.scale_e_serpenti.logica.turno;
 
 import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
-import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneIF;
 
 public class TurnoE extends TurnoAb{
 
@@ -15,7 +14,8 @@ public class TurnoE extends TurnoAb{
             giocatore.setRigioca(false);
         }
 
-        int risultatoDadi = 0;
+        int risultatoDadi;
+
         if(tabellone.getDimensione() - giocatore.getPosizione() < 6){
             risultatoDadi = lanciaDadoSingolo();
             System.out.println("Giocatore lancia il dado: " +risultatoDadi);
