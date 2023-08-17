@@ -4,13 +4,13 @@ import falcone.francesco.scale_e_serpenti.logica.impostazioni.ImpostazioniTabell
 
 public interface TabelloneBuilderIF {
 
-    public void buildBase(ImpostazioniTabellone impostazioniTabellone);
-    public void setTraguardo();
-    public void buildSerpenti();
-    public void buildScale();
-    public void buildCasellaSosta();
-    public void buildCasellaPremio();
-    public void buildCasellaPescaUnaCarta();
-    public void buildCasellaPescaUnaCartaMod();
-    public TabelloneIF getTabellone();
+    void buildBase(ImpostazioniTabellone impostazioniTabellone);
+    void setTraguardo();
+    void buildSerpenti();
+    void buildScale();
+    void buildCasellaSosta();
+    void buildCasellaPremio();
+    void buildCasellaPescaUnaCarta();
+    void buildCasellaPescaUnaCartaMod();
+    TabelloneIF getTabellone();
 }
