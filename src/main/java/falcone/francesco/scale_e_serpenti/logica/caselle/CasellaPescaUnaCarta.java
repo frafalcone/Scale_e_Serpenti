@@ -42,15 +42,23 @@ public class CasellaPescaUnaCarta extends CasellaDecorator{
 
         switch(cartaPescata){
             case 0:
+                System.out.println("Giocatore pesca la carta: Dado;");
                 giocatore.setRigioca(true);
                 break;
             case 1:
+                if(giocatore.getPossiedeDivietoSosta()){
+
+
+                }
+                System.out.println("Giocatore pesca la carta: Panchina;");
                 giocatore.setAttesa(1);
                 break;
             case 2:
+                System.out.println("Giocatore pesca la carta: Molla;");
                 giocatore.setMolla(true);
                 break;
             case 3:
+                System.out.println("Giocatore pesca la carta: Locanda;");
                 giocatore.setAttesa(3);
                 break;
         }

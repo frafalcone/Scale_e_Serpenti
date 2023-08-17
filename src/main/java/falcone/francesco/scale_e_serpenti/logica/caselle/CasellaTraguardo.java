@@ -15,6 +15,7 @@ public class CasellaTraguardo extends CasellaDecorator{
     }
 
     private void comportamentoAggiunto(Giocatore giocatore) {
+        System.out.println("Giocatore ha raggiunto il Traguardo;");
         giocatore.setHaVinto(true);
     }
 

@@ -38,7 +38,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
             boolean posizionato = false;
 
             while(!posizionato){
-                indiceTestaSerpente = random.nextInt(0, dimensione)+1;
+                indiceTestaSerpente = random.nextInt(1, dimensione)+1;
                 indiceCodaSerpente = random.nextInt(1, indiceTestaSerpente);
                 if(!tabellone.getCasella(indiceTestaSerpente).getAssegnata() || !tabellone.getCasella(indiceCodaSerpente).getAssegnata()){
                     CasellaIF casella = new CasellaSerpente(tabellone.getCasella(indiceTestaSerpente), indiceCodaSerpente);
@@ -54,23 +54,34 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
 
     @Override
     public void buildScale() {
+        boolean traguardoAssegnato = false;
+
         int numeroScale = impostazioniTabellone.getNumeroScale();
         int dimensione = impostazioniTabellone.getRighe()*impostazioniTabellone.getColonne();
         Random random = new Random();
 
         while (numeroScale>0){
-            int indiceTestaScala = -1;
-            int indiceCodaScala = -1;
+            int indiceBaseScala = -1;
+            int indiceFineScala = -1;
             boolean posizionato = false;
 
             while(!posizionato){
-                indiceTestaScala = random.nextInt(0, dimensione);
-                indiceCodaScala = random.nextInt(indiceTestaScala, dimensione)+1;
-                if(!tabellone.getCasella(indiceTestaScala).getAssegnata() || !tabellone.getCasella(indiceCodaScala).getAssegnata()){
-                    CasellaIF casella = new CasellaScala(tabellone.getCasella(indiceCodaScala), indiceTestaScala);
+                indiceBaseScala = random.nextInt(2, dimensione);
+                indiceFineScala = random.nextInt(indiceBaseScala, dimensione)+1;
+                if(!traguardoAssegnato && (indiceFineScala == dimensione)){
+                    CasellaIF casella = new CasellaScala(tabellone.getCasella(indiceBaseScala), indiceFineScala);
                     casella.setAssegnata(true);
                     tabellone.setCasella(casella);
-                    tabellone.getCasella(indiceTestaScala).setAssegnata(true);
+                    tabellone.getCasella(indiceFineScala).setAssegnata(true);
+                    numeroScale--;
+                    posizionato = true;
+                    traguardoAssegnato = true;
+                }
+                else if(!tabellone.getCasella(indiceFineScala).getAssegnata() || !tabellone.getCasella(indiceBaseScala).getAssegnata()){
+                    CasellaIF casella = new CasellaScala(tabellone.getCasella(indiceBaseScala), indiceFineScala);
+                    casella.setAssegnata(true);
+                    tabellone.setCasella(casella);
+                    tabellone.getCasella(indiceFineScala).setAssegnata(true);
                     numeroScale--;
                     posizionato = true;
                 }
@@ -89,9 +100,9 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
             boolean posizionato = false;
 
             while(!posizionato){
-                indiceCasella = random.nextInt(0, dimensione);
+                indiceCasella = random.nextInt(2, dimensione);
                 if(!tabellone.getCasella(indiceCasella).getAssegnata()){
-                    if ((random.nextInt(0,1)+1)%2==0){
+                    if ((random.nextInt(0,9)+1)%2==0){
                         CasellaIF casella =  new CasellaPanchina(tabellone.getCasella(indiceCasella));
                         casella.setAssegnata(true);
                         tabellone.setCasella(casella);
@@ -120,9 +131,9 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
             boolean posizionato = false;
 
             while(!posizionato){
-                indiceCasella = random.nextInt(0, dimensione);
+                indiceCasella = random.nextInt(2, dimensione);
                 if(!tabellone.getCasella(indiceCasella).getAssegnata()){
-                    if ((random.nextInt(0,1)+1)%2==0){
+                    if ((random.nextInt(0,9)+1)%2==0){
                         CasellaIF casella = new CasellaDadi(tabellone.getCasella(indiceCasella));
                         casella.setAssegnata(true);
                         tabellone.setCasella(casella);
@@ -150,7 +161,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
             boolean posizionato = false;
 
             while(!posizionato){
-                indiceCasella = random.nextInt(0, dimensione);
+                indiceCasella = random.nextInt(2, dimensione);
                 if(!tabellone.getCasella(indiceCasella).getAssegnata()){
                     CasellaIF casella = new CasellaPescaUnaCarta(tabellone.getCasella(indiceCasella));
                     casella.setAssegnata(true);
@@ -173,7 +184,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
             boolean posizionato = false;
 
             while(!posizionato){
-                indiceCasella = random.nextInt(0, dimensione);
+                indiceCasella = random.nextInt(2, dimensione);
                 if(!tabellone.getCasella(indiceCasella).getAssegnata()){
                     CasellaIF casella = new CasellaPescaUnaCartaMod(tabellone.getCasella(indiceCasella));
                     casella.setAssegnata(true);

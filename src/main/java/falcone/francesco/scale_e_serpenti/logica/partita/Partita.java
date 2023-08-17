@@ -50,93 +50,196 @@ public class Partita {
         Scanner sc = new Scanner(System.in);
 
         while(!finitaCreazione){
-            switch (fase){
+            boolean faseCorretta = false;
+            int input;
 
-                case 0: //NUMEROGIOCATORI
-                    System.out.print("\nGiocatori: ");
-                    impostazioniGiocatori.setNumeroGiocatori(sc.nextInt());
-                    break;
+            switch (fase) {
+                case 0 -> {
+                    System.out.println("\n\n========================================");
+                    System.out.println("         IMPOSTAZIONI GIOCATORI         ");
+                    System.out.println("----------------------------------------");
+                    System.out.print("\nNumero dei Giocatori: ");
+                    input = sc.nextInt();
+                    if (input > 0) {
+                        impostazioniGiocatori.setNumeroGiocatori(input);
+                    } else {
+                        System.err.println("\nIl numero deve essere maggiore di 0");
+                        break;
+                    }
 
-                case 1: //CASELLE
-                    System.out.print("\nAbilita casellePremio (1: si; altro: no): ");
-                    if(sc.nextInt() == 1)
+                    System.out.println("\n========================================\n");
+                    faseCorretta = true;
+                }
+                case 1 -> {
+                    System.out.println("\n\n========================================");
+                    System.out.println("         IMPOSTAZIONI CASELLE           ");
+                    System.out.println("----------------------------------------");
+                    System.out.print("\nAbilita casellePremio (1: si; 0: no): ");
+                    input = sc.nextInt();
+                    if (input == 1) {
                         impostazioniCaselle.setCasellaPremio(true);
-                    else {
+                    } else if (input == 0) {
                         impostazioniCaselle.setCasellaPremio(false);
+                    } else {
+                        System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+                        break;
                     }
-                    System.out.print("\nAbilita asellaPescaUnaCarta (1: si; altro: no): ");
-                    if(sc.nextInt() == 1)
+                    System.out.print("\nAbilita casellaPesca (1: si; 0: no): ");
+                    input = sc.nextInt();
+                    if (input == 1) {
                         impostazioniCaselle.setCasellaPescaUnaCarta(true);
-                    else {
+                    } else if (input == 0) {
                         impostazioniCaselle.setCasellaPescaUnaCarta(false);
+                    } else {
+                        System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+                        break;
                     }
-                    System.out.print("\nAbilita casellaSosta (1: si; altro: no): ");
-                    if(sc.nextInt() == 1)
+                    System.out.print("\nAbilita casellaSosta (1: si; 0: no): ");
+                    input = sc.nextInt();
+                    if (input == 1) {
                         impostazioniCaselle.setCasellaSosta(true);
-                    else {
+                    } else if (input == 0) {
                         impostazioniCaselle.setCasellaSosta(false);
+                    } else {
+                        System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+                        break;
                     }
-                    break;
 
-                case 2: //REGOLE
-                    System.out.print("\nAbilita dadoSingolo (1: si; altro: no): ");
-                    if(sc.nextInt() == 1)
+                    System.out.println("\n========================================\n");
+                    faseCorretta = true;
+
+                }
+                case 2 -> {
+                    System.out.println("\n\n========================================");
+                    System.out.println("         IMPOSTAZIONI REGOLE            ");
+                    System.out.println("----------------------------------------");
+                    System.out.print("\nAbilita dadoSingolo (1: si; 0: no): ");
+                    input = sc.nextInt();
+                    if (input == 1) {
                         impostazioniRegole.setDadoSingolo(true);
-                    else {
+                    } else if (input == 0) {
                         impostazioniRegole.setDadoSingolo(false);
+                    } else {
+                        System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+                        break;
                     }
-                    if(!impostazioniRegole.getDadoSingolo()){
-                        System.out.print("\nAbilita doppioSei (1: si; altro: no): ");
-                        if(sc.nextInt() == 1)
+                    if (!impostazioniRegole.getDadoSingolo()) {
+                        System.out.print("\nAbilita doppioSei (1: si; 0: no): ");
+                        input = sc.nextInt();
+                        if (input == 1) {
                             impostazioniRegole.setDoppioSei(true);
-                        else {
+                        } else if (input == 0) {
                             impostazioniRegole.setDoppioSei(false);
+                        } else {
+                            System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+                            break;
                         }
                     }
-                    if(!impostazioniRegole.getDadoSingolo()) {
-                        System.out.print("\nAbilita lancioSingolo (1: si; altro: no): ");
-                        if (sc.nextInt() == 1)
+                    if (!impostazioniRegole.getDadoSingolo()) {
+                        System.out.print("\nAbilita lancioSingolo (1: si; 0: no): ");
+                        input = sc.nextInt();
+                        if (input == 1) {
                             impostazioniRegole.setLancioSingolo(true);
-                        else {
+                        } else if (input == 0) {
                             impostazioniRegole.setLancioSingolo(false);
+                        } else {
+                            System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+                            break;
                         }
                     }
-                    if(impostazioniCaselle.getCasellaPescaUnaCarta()){
-                        System.out.print("\nAbilita ulterioriCarte (1: si; altro: no): ");
-                        if(sc.nextInt() == 1)
+                    if (impostazioniCaselle.getCasellaPescaUnaCarta()) {
+                        System.out.print("\nAbilita ulterioriCarte (1: si; 0: no): ");
+                        input = sc.nextInt();
+                        if (input == 1) {
                             impostazioniCaselle.setUlterioriCarte(true);
-                        else {
+                        } else if (input == 0) {
                             impostazioniCaselle.setUlterioriCarte(false);
+                        } else {
+                            System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+                            break;
                         }
                     }
-                    break;
 
-                case 3: //TABELLONE
+                    System.out.println("\n========================================\n");
+                    faseCorretta = true;
+                }
+                case 3 -> {
+                    System.out.println("\n\n========================================");
+                    System.out.println("         IMPOSTAZIONI TABELLONE         ");
+                    System.out.println("----------------------------------------");
                     System.out.print("\nRighe: ");
-                    impostazioniTabellone.setRighe(sc.nextInt());
+                    input = sc.nextInt();
+                    if (input < 4 || input > 12) {
+                        System.err.println("Numero min: 4; Numero max: 12;");
+                        break;
+                    }
+                    impostazioniTabellone.setRighe(input);
                     System.out.print("\nColonne: ");
-                    impostazioniTabellone.setColonne(sc.nextInt());
-                    System.out.print("\nScale: ");
-                    impostazioniTabellone.setNumeroScale(sc.nextInt());
-                    System.out.print("\nSerpenti: ");
-                    impostazioniTabellone.setNumeroSerpenti(sc.nextInt());
-                    if(impostazioniCaselle.getCasellaPremio()){
-                        System.out.print("\nPremio: ");
-                        impostazioniTabellone.setNumeroCasellePremio(sc.nextInt());
+                    input = sc.nextInt();
+                    if (input < 4 || input > 12) {
+                        System.err.println("Numero min: 4; Numero max: 12;");
+                        break;
                     }
-                    if(impostazioniCaselle.getCasellaSosta()){
-                        System.out.print("\nSosta: ");
-                        impostazioniTabellone.setNumeroCaselleSosta(sc.nextInt());
+                    impostazioniTabellone.setColonne(input);
+                    int caselleDisponibili = (impostazioniTabellone.getRighe() * impostazioniTabellone.getColonne()) - 1;
+                    System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Scale: ");
+                    input = sc.nextInt();
+                    if (input > caselleDisponibili) {
+                        System.err.print("Caselle non disponibili;");
+                        break;
                     }
-                    if(impostazioniCaselle.getCasellaPescaUnaCarta()){
-                        System.out.print("\nPesca_Carta: ");
-                        impostazioniTabellone.setNumeroCasellePescaUnaCarta(sc.nextInt());
+                    impostazioniTabellone.setNumeroScale(input);
+                    caselleDisponibili -= input * 2;
+                    System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Serpenti: ");
+                    input = sc.nextInt();
+                    if (input > caselleDisponibili) {
+                        System.err.print("Caselle non disponibili;");
+                        break;
                     }
-                    break;
-                case 4:
+                    impostazioniTabellone.setNumeroSerpenti(input);
+                    caselleDisponibili -= input * 2;
+                    if (impostazioniCaselle.getCasellaPremio()) {
+                        System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Premio: ");
+                        input = sc.nextInt();
+                        if (input > caselleDisponibili) {
+                            System.err.print("Caselle non disponibili;");
+                            break;
+                        }
+                        impostazioniTabellone.setNumeroCasellePremio(input);
+                        caselleDisponibili -= input;
+                    }
+                    if (impostazioniCaselle.getCasellaSosta()) {
+                        System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Sosta: ");
+                        input = sc.nextInt();
+                        if (input > caselleDisponibili) {
+                            System.err.print("Caselle non disponibili;");
+                            break;
+                        }
+                        impostazioniTabellone.setNumeroCaselleSosta(input);
+                        caselleDisponibili -= input;
+                    }
+                    if (impostazioniCaselle.getCasellaPescaUnaCarta()) {
+                        System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Pesca_Carta: ");
+                        input = sc.nextInt();
+                        if (input > caselleDisponibili) {
+                            System.err.print("Caselle non disponibili;");
+                            break;
+                        }
+                        impostazioniTabellone.setNumeroCasellePescaUnaCarta(input);
+                    }
+
+                    System.out.println("\n========================================\n");
+                    faseCorretta = true;
+                }
+                case 4 -> {
+                    System.out.println("\n\n========================================");
+                    System.out.println("             FINE CREAZIONE             ");
+                    System.out.println("========================================\n");
                     finitaCreazione = true;
+                }
             }
-            fase++;
+            if(faseCorretta)
+                fase++;
         }
 
 
@@ -177,13 +280,17 @@ public class Partita {
         boolean finito = false;
         int turno = 0;
 
-        Giocatore giocatori[] = new Giocatore[impostazioniGiocatori.getNumeroGiocatori()];
+        Giocatore[] giocatori = new Giocatore[impostazioniGiocatori.getNumeroGiocatori()];
 
         for(int i=0; i<impostazioniGiocatori.getNumeroGiocatori(); i++){
             giocatori[i] = new Giocatore();
         }
 
         int indiceVincitore = -1;
+
+        System.out.println("\n\n========================================");
+        System.out.println("             INIZIO PARTITA             ");
+        System.out.println("========================================");
 
         while(!finito){
 
@@ -192,7 +299,8 @@ public class Partita {
             int indiceGiocatoreAttuale = turno % impostazioniGiocatori.getNumeroGiocatori();
             Giocatore giocatoreAttuale = giocatori[indiceGiocatoreAttuale];
 
-            System.out.println("TURNO "+ turno +"; GIOCATORE "+indiceGiocatoreAttuale);
+            System.out.println("----------------------------------------\n");
+            System.out.println("TURNO "+ turno +"; GIOCATORE "+indiceGiocatoreAttuale +"\n");
 
             if(giocatoreAttuale.getAttesa()<=0){
                 sistemaTurni.esegui(giocatoreAttuale);
@@ -206,19 +314,26 @@ public class Partita {
 
                 if(giocatoreAttuale.getHaVinto()){
                     indiceVincitore = indiceGiocatoreAttuale;
-                    System.out.println("VINCITORE:" + indiceVincitore);
                     finito = true;
                 }
+                System.out.println("\nFine turno;\n");
+                System.out.println("----------------------------------------");
             }
 
             else {
                 giocatoreAttuale.setAttesa(giocatoreAttuale.getAttesa()-1);
-                System.out.println("G"+indiceGiocatoreAttuale+" ATTESA");
+                System.out.println("Giocatore deve attendere;\n");
             }
+
+            System.out.println("========================================");
 
             turno++;
         }
-
+        System.out.println("----------------------------------------\n");
+        System.out.println("\n========================================");
+        System.out.println("******|| VINCITORE: Giocatore "+indiceVincitore+" ||******" );
+        System.out.println("========================================\n");
+        System.out.println("\n----------------------------------------\n");
     }
 
     private void gestioneAutomatizzazione() {

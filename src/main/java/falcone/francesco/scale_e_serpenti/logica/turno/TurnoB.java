@@ -11,20 +11,21 @@ public class TurnoB extends TurnoAb{
 
     public void esegui(Giocatore giocatore){
 
+        if(giocatore.getRigioca()){
+            giocatore.setRigioca(false);
+        }
+
         int risultatoDadi = lanciaDadoSingolo();
 
-        muovi(giocatore, risultatoDadi);
+        System.out.println("Giocatore lancia il dado: " +risultatoDadi);
 
-        if(giocatore.getMolla()){
-            muovi(giocatore, risultatoDadi);
-        }
+        muovi(giocatore, risultatoDadi);
 
         if(giocatore.getHaVinto()){
             return;
         }
 
-        if(giocatore.getRigioca()){
-            esegui(giocatore);
-        }
+        molla(giocatore, risultatoDadi);
+        rigioca(giocatore);
     }
 }

@@ -13,7 +13,7 @@ public class Casella implements CasellaIF{
     }
 
     public void passaggio(Giocatore giocatore){
-
+       System.out.println("\nCasella Raggiunta["+indiceCasella+"];");
     };
 
     public boolean getAssegnata() {return assegnata;}

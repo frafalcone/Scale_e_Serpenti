@@ -18,7 +18,9 @@ public class CasellaScala extends CasellaDecorator{
     }
 
     private void comportamentoAggiunto(Giocatore giocatore) {
+        System.out.println("Giocatore arriva su una Scala, posizione: "+ giocatore.getPosizione() +";");
         giocatore.setPosizione(destinazione);
+        System.out.println("Giocatore sale la Scala, posizione: "+ giocatore.getPosizione() +";");
     }
 
 

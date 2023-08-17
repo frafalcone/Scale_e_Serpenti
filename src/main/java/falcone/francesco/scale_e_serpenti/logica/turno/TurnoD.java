@@ -11,25 +11,23 @@ public class TurnoD extends TurnoAb{
 
     public void esegui(Giocatore giocatore){
 
+        if(giocatore.getRigioca()){
+            giocatore.setRigioca(false);
+        }
+
         int risultatoDadi = lanciaDadiDoppi();
 
+        System.out.println("Giocatore lancia i dadi: " +risultatoDadi);
+
         muovi(giocatore, risultatoDadi);
-
-        if(giocatore.getMolla()){
-            muovi(giocatore, risultatoDadi);
-        }
-
-        if(risultatoDadi == 12){
-            esegui(giocatore);
-        }
 
         if(giocatore.getHaVinto()){
             return;
         }
 
-        if(giocatore.getRigioca()){
-            esegui(giocatore);
-        }
+        molla(giocatore, risultatoDadi);
+        doppioSei(giocatore, risultatoDadi);
+        rigioca(giocatore);
     }
 
 }

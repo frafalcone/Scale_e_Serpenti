@@ -46,31 +46,38 @@ public class CasellaPescaUnaCartaMod extends CasellaDecorator{
 
         switch(cartaPescata){
             case 0:
+                System.out.println("Giocatore pesca la carta: Dadi;");
                 giocatore.setRigioca(true);
                 break;
             case 1:
                 if(!giocatore.getPossiedeDivietoSosta()){
+                    System.out.println("Giocatore pesca la carta: Panchina;");
                     giocatore.setAttesa(1);
                 }
                 else{
+                    System.out.println("Giocatore pesca la carta: Panchina; Ma usa Divieto di Sosta!");
                     giocatore.setPossiedeDivietoSosta(false);
                     carte.addLast(4);
                 }
 
                 break;
             case 2:
+                System.out.println("Giocatore pesca la carta: Molla;");
                 giocatore.setMolla(true);
                 break;
             case 3:
                 if(!giocatore.getPossiedeDivietoSosta()){
+                    System.out.println("Giocatore pesca la carta: Locanda;");
                     giocatore.setAttesa(3);
                 }
                 else{
+                    System.out.println("Giocatore pesca la carta: Locanda; Ma usa Divieto di Sosta!");
                     giocatore.setPossiedeDivietoSosta(false);
                     carte.addLast(4);
                 }
                 break;
             case 4:
+                System.out.println("Giocatore pesca la carta: Divieto di Sosta;");
                 giocatore.setPossiedeDivietoSosta(true);
                 break;
         }

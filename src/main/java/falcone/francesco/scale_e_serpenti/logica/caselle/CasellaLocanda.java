@@ -16,9 +16,11 @@ public class CasellaLocanda extends CasellaDecorator{
 
     private void comportamentoAggiunto(Giocatore giocatore) {
         if(!giocatore.getPossiedeDivietoSosta()){
-            giocatore.setAttesa(1);
+            System.out.println("Giocatore arriva su una Locanda, deve riposarsi per 3 turni;");
+            giocatore.setAttesa(3);
         }
         else{
+            System.out.println("Giocatore arriva su una Molla, ma usa la carta Divieto di Sosta;");
             giocatore.setPossiedeDivietoSosta(false);
             giocatore.setUsatoDivietoSosta(true);
         }

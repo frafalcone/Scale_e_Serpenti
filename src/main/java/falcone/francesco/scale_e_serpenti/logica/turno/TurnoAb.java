@@ -23,20 +23,45 @@ public abstract class TurnoAb implements TurnoIF {
 
     public void setTabellone(TabelloneIF tabellone) {this.tabellone = tabellone;}
 
-    protected int lanciaDadiDoppi() {return new Random().nextInt(1, 13);}
+    protected int lanciaDadiDoppi() {return new Random().nextInt(2, 13);}
     protected int lanciaDadoSingolo() {return new Random().nextInt(1, 7);}
 
     protected void muovi(Giocatore giocatore, int risultatoDadi){
+        if(giocatore.getHaVinto())
+            return;
+
         if(giocatore.getPosizione()+risultatoDadi <= tabellone.getDimensione()){
             giocatore.setPosizione(giocatore.getPosizione()+risultatoDadi);
             tabellone.getCasella(giocatore.getPosizione()).passaggio(giocatore);
         }
 
-        if(giocatore.getPosizione()+risultatoDadi > tabellone.getDimensione()){
-            int risultatoDadiAggiornato = (giocatore.getPosizione() + risultatoDadi) - tabellone.getDimensione();
-            giocatore.setPosizione((giocatore.getPosizione()-risultatoDadiAggiornato));
-            tabellone.getCasella((giocatore.getPosizione()-risultatoDadiAggiornato)).passaggio(giocatore);
+        else if(giocatore.getPosizione()+risultatoDadi > tabellone.getDimensione()){
+            int A = (tabellone.getDimensione() - giocatore.getPosizione());
+            int B = (risultatoDadi-A);
+            int C = (giocatore.getPosizione() - B)+A;
+            giocatore.setPosizione(C);
+            tabellone.getCasella(giocatore.getPosizione()).passaggio(giocatore);
         }
     }
 
+    protected void molla(Giocatore giocatore, int risultatoDadi){
+        if(giocatore.getMolla()){
+            System.out.println("Giocatore rimbalza sulla Molla;");
+            muovi(giocatore, risultatoDadi);
+        }
+    }
+
+    protected void doppioSei(Giocatore giocatore, int risultatoDadi){
+        if(risultatoDadi == 12){
+            System.out.println("Giocatore ha fatto Doppio Sei;");
+            esegui(giocatore);
+        }
+    }
+
+    protected  void rigioca(Giocatore giocatore){
+        if(giocatore.getRigioca()){
+            System.out.println("Giocatore riesegue il Turno;");
+            esegui(giocatore);
+        }
+    }
 }

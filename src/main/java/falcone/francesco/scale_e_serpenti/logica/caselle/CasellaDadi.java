@@ -15,6 +15,7 @@ public class CasellaDadi extends CasellaDecorator{
     }
 
     private void comportamentoAggiunto(Giocatore giocatore) {
+        System.out.println("Giocatore ottiene di nuovo i Dadi;");
         giocatore.setRigioca(true);
     }
 
