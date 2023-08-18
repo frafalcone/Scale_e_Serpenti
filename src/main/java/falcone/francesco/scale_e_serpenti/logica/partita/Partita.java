@@ -208,17 +208,17 @@ public class Partita {
                     }
                     impostazioniTabellone.setColonne(input);
                     int caselleDisponibili = (impostazioniTabellone.getRighe() * impostazioniTabellone.getColonne()) - 1;
-                    System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Scale: ");
+                    System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Scale (Richiedono n*2): ");
                     input = sc.nextInt();
-                    if (input > caselleDisponibili) {
+                    if (input * 2> caselleDisponibili) {
                         System.err.print("Caselle non disponibili;");
                         break;
                     }
                     impostazioniTabellone.setNumeroScale(input);
                     caselleDisponibili -= input * 2;
-                    System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Serpenti: ");
+                    System.out.print("\n(Caselle Disponibili: " + caselleDisponibili + "); Serpenti (Richiedono n*2): ");
                     input = sc.nextInt();
-                    if (input > caselleDisponibili) {
+                    if (input * 2> caselleDisponibili) {
                         System.err.print("Caselle non disponibili;");
                         break;
                     }
