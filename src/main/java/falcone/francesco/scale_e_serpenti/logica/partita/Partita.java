@@ -213,6 +213,9 @@ public class Partita {
                     if (input * 2> caselleDisponibili) {
                         System.err.print("Caselle non disponibili;");
                         break;
+                    } else if (input < 0) {
+                        System.err.print("Inserire un numero maggiore di 0;\n");
+                        break;
                     }
                     impostazioniTabellone.setNumeroScale(input);
                     caselleDisponibili -= input * 2;
@@ -220,6 +223,9 @@ public class Partita {
                     input = sc.nextInt();
                     if (input * 2> caselleDisponibili) {
                         System.err.print("Caselle non disponibili;");
+                        break;
+                    } else if (input < 0) {
+                        System.err.print("Inserire un numero maggiore di 0;\n");
                         break;
                     }
                     impostazioniTabellone.setNumeroSerpenti(input);
@@ -229,6 +235,9 @@ public class Partita {
                         input = sc.nextInt();
                         if (input > caselleDisponibili) {
                             System.err.print("Caselle non disponibili;");
+                            break;
+                        } else if (input < 0) {
+                            System.err.print("Inserire un numero maggiore di 0;\n");
                             break;
                         }
                         impostazioniTabellone.setNumeroCasellePremio(input);
@@ -240,6 +249,9 @@ public class Partita {
                         if (input > caselleDisponibili) {
                             System.err.print("Caselle non disponibili;");
                             break;
+                        } else if (input < 0) {
+                            System.err.print("Inserire un numero maggiore di 0;\n");
+                            break;
                         }
                         impostazioniTabellone.setNumeroCaselleSosta(input);
                         caselleDisponibili -= input;
@@ -249,6 +261,9 @@ public class Partita {
                         input = sc.nextInt();
                         if (input > caselleDisponibili) {
                             System.err.print("Caselle non disponibili;");
+                            break;
+                        } else if (input < 0) {
+                            System.err.print("Inserire un numero maggiore di 0;\n");
                             break;
                         }
                         impostazioniTabellone.setNumeroCasellePescaUnaCarta(input);
