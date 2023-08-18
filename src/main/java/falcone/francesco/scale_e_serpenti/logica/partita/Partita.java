@@ -13,6 +13,7 @@ import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneIF;
 import falcone.francesco.scale_e_serpenti.logica.turno.SelettoreSistemaTurni;
 import falcone.francesco.scale_e_serpenti.logica.turno.TurnoIF;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class Partita {
@@ -40,6 +41,31 @@ public class Partita {
         impostazioniCaselle = new ImpostazioniCaselle();
         impostazioniRegole = new ImpostazioniRegole();
         impostazioniGiocatori = new ImpostazioniGiocatori();
+
+        Scanner sc = new Scanner(System.in);
+        int input;
+        boolean scelto=false;
+
+        while (!scelto){
+            System.out.println("\n\n========================================");
+            System.out.println("     CREARE O CARICARE LA PARTITA?      ");
+            System.out.println("----------------------------------------");
+            System.out.print("(1 per creare; 0 per caricare): ");
+            input = sc.nextInt();
+            if(input==0) {
+                scelto = true;
+                caricaPartita();
+            } else if(input == 1){
+                scelto = true;
+                creaPartita();
+            } else {
+                System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+            }
+        }
+
+        sc.close();
+        gameInitAndLoop();
+
     }
 
     public void creaPartita(){
@@ -233,15 +259,33 @@ public class Partita {
                 }
                 case 4 -> {
                     System.out.println("\n\n========================================");
+                    System.out.println("     VUOI SALVARE LA CONFIGURAZIONE?    ");
+                    System.out.println("----------------------------------------");
+                    System.out.print("(1 per dire si; 0 per dire no): ");
+                    input = sc.nextInt();
+                    if(input==1){
+                        salvaPartita();
+                        faseCorretta = true;
+                    } else if (input == 0) {
+                        faseCorretta = true;
+                    } else {
+                        System.err.println("\nSi accetta solo 1 o 0 come risposta;");
+                        break;
+                    }
+                }
+                case 5 -> {
+                    System.out.println("\n\n========================================");
                     System.out.println("             FINE CREAZIONE             ");
                     System.out.println("========================================\n");
                     finitaCreazione = true;
+                    break;
                 }
             }
             if(faseCorretta)
                 fase++;
         }
 
+        sc.close();
 
         sistemaTurni = new SelettoreSistemaTurni().seleziona(impostazioniRegole);
 
@@ -254,15 +298,134 @@ public class Partita {
     }
 
     public void salvaPartita(){
-        /*
-        scrittura delle variabili su file ".save" delle varie impostazioni, tramite i metodi di get;
-         */
+            try {
+                FileWriter flwr = new FileWriter("Save.txt");
+                StringBuilder stbr = new StringBuilder();
+
+                stbr.append(impostazioniGiocatori.getNumeroGiocatori());
+                stbr.append("\n");
+
+                stbr.append(impostazioniCaselle.getCasellaPremio());
+                stbr.append("\n");
+                stbr.append(impostazioniCaselle.getCasellaSosta());
+                stbr.append("\n");
+                stbr.append(impostazioniCaselle.getCasellaPescaUnaCarta());
+                stbr.append("\n");
+
+                stbr.append(impostazioniRegole.getDadoSingolo());
+                stbr.append("\n");
+                stbr.append(impostazioniRegole.getDoppioSei());
+                stbr.append("\n");
+                stbr.append(impostazioniRegole.getLancioSingolo());
+                stbr.append("\n");
+                stbr.append(impostazioniCaselle.getUlterioriCarte());
+                stbr.append("\n");
+
+                stbr.append(impostazioniTabellone.getRighe());
+                stbr.append("\n");
+                stbr.append(impostazioniTabellone.getColonne());
+                stbr.append("\n");
+                stbr.append(impostazioniTabellone.getNumeroScale());
+                stbr.append("\n");
+                stbr.append(impostazioniTabellone.getNumeroSerpenti());
+                stbr.append("\n");
+                stbr.append(impostazioniTabellone.getNumeroCasellePremio());
+                stbr.append("\n");
+                stbr.append(impostazioniTabellone.getNumeroCaselleSosta());
+                stbr.append("\n");
+                stbr.append(impostazioniTabellone.getNumeroCasellePescaUnaCarta());
+                stbr.append("\n");
+
+
+                String str = stbr.toString();
+                System.out.println(str);
+                flwr.write(str);
+                flwr.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+
     }
 
     public void caricaPartita(){
-        /*
-        lettura delle variabili da file ".save" delle varie impostazioni, tramite i metodi di set;
-         */
+        try {
+            File file = new File("Save.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            String str;
+            int fase = 0;
+            
+            while ((str = br.readLine()) != null){
+                switch (fase){
+                    case 0 -> {
+                       impostazioniGiocatori.setNumeroGiocatori(Integer.parseInt(str));
+                       break;
+                    }
+                    case 1 -> {
+                        impostazioniCaselle.setCasellaPremio(Boolean.parseBoolean(str));
+                        break;
+                    }
+                    case 2 -> {
+                        impostazioniCaselle.setCasellaSosta(Boolean.parseBoolean(str));
+                        break;
+                    }
+                    case 3 -> {
+                        impostazioniCaselle.setCasellaPescaUnaCarta(Boolean.parseBoolean(str));
+                        break;
+                    }
+                    case 4 -> {
+                        impostazioniRegole.setDadoSingolo(Boolean.parseBoolean(str));
+                        break;
+                    }
+                    case 5 -> {
+                        impostazioniRegole.setDoppioSei(Boolean.parseBoolean(str));
+                        break;
+                    }
+                    case 6 -> {
+                        impostazioniRegole.setLancioSingolo(Boolean.parseBoolean(str));
+                        break;
+                    }
+                    case 7 -> {
+                        impostazioniCaselle.setUlterioriCarte(Boolean.parseBoolean(str));
+                        break;
+                    }
+                    case 8 -> {
+                        impostazioniTabellone.setRighe(Integer.parseInt(str));
+                        break;
+                    }
+                    case 9 -> {
+                        impostazioniTabellone.setColonne(Integer.parseInt(str));
+                        break;
+                    }
+                    case 10 -> {
+                        impostazioniTabellone.setNumeroScale(Integer.parseInt(str));
+                        break;
+                    }
+                    case 11 -> {
+                        impostazioniTabellone.setNumeroSerpenti(Integer.parseInt(str));
+                        break;
+                    }
+                    case 12 -> {
+                        impostazioniTabellone.setNumeroCasellePremio(Integer.parseInt(str));
+                        break;
+                    }
+                    case 13 -> {
+                        impostazioniTabellone.setNumeroCaselleSosta(Integer.parseInt(str));
+                        break;
+                    }
+                    case 14 -> {
+                        impostazioniTabellone.setNumeroCasellePescaUnaCarta(Integer.parseInt(str));
+                        break;
+                    }
+                    default -> throw new IllegalStateException("Errore nella fase: " + fase);
+                }
+                fase++;
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
 
         sistemaTurni = new SelettoreSistemaTurni().seleziona(impostazioniRegole);
 

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class CasellaPescaUnaCarta extends CasellaDecorator{
 
-    private LinkedList<Integer> carte;
+    private static LinkedList<Integer> carte;
     private static boolean creato = false;
 
     public CasellaPescaUnaCarta(CasellaIF casellaAssegnata){
@@ -21,7 +21,7 @@ public class CasellaPescaUnaCarta extends CasellaDecorator{
     public void creaMazzo(){
         carte = new LinkedList<>();
 
-        for(int i=0; i<5; i++){
+        for(int i=0; i<4; i++){
             carte.add(i);
             carte.add(i);
             carte.add(i);
