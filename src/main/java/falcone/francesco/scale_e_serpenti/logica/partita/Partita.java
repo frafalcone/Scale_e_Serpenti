@@ -563,7 +563,7 @@ public class Partita {
             System.out.println("TURNO "+ turno +"; GIOCATORE "+indiceGiocatoreAttuale +"\n");
 
             if(giocatoreAttuale.getAttesa()<=0){
-                sistemaTurni.esegui(giocatoreAttuale);
+                System.out.println(sistemaTurni.esegui(giocatoreAttuale));
 
                 if(giocatoreAttuale.getUsatoDivietoSosta()){
                     CasellaPescaUnaCartaMod.riconsegnaDivietoSosta(giocatoreAttuale);

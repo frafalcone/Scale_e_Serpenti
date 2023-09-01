@@ -9,20 +9,22 @@ public class CasellaLocanda extends CasellaDecorator{
     }
 
     @Override
-    public void passaggio(Giocatore giocatore) {
-        super.passaggio(giocatore);
-        comportamentoAggiunto(giocatore);
+    public String passaggio(Giocatore giocatore) {
+        StringBuilder stbr = new StringBuilder();
+        stbr.append(super.passaggio(giocatore));
+        stbr.append(comportamentoAggiunto(giocatore));
+        return stbr.toString();
     }
 
-    private void comportamentoAggiunto(Giocatore giocatore) {
+    private String comportamentoAggiunto(Giocatore giocatore) {
         if(!giocatore.getPossiedeDivietoSosta()){
-            System.out.println("Giocatore arriva su una Locanda, deve riposarsi per 3 turni;");
             giocatore.setAttesa(3);
+            return "\nGiocatore arriva su una Locanda, deve riposarsi per 3 turni;";
         }
         else{
-            System.out.println("Giocatore arriva su una Molla, ma usa la carta Divieto di Sosta;");
             giocatore.setPossiedeDivietoSosta(false);
             giocatore.setUsatoDivietoSosta(true);
+            return "\nGiocatore arriva su una Molla, ma usa la carta Divieto di Sosta;";
         }
     }
 

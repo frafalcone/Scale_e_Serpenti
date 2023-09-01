@@ -12,8 +12,8 @@ public class Casella implements CasellaIF{
         indiceCasella = 0;
     }
 
-    public void passaggio(Giocatore giocatore){
-       System.out.println("\nCasella Raggiunta["+indiceCasella+"];");
+    public String passaggio(Giocatore giocatore){
+       return "\nCasella Raggiunta["+indiceCasella+"];";
     }
 
     public boolean getAssegnata() {return assegnata;}

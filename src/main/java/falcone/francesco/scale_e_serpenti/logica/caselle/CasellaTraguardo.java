@@ -9,14 +9,16 @@ public class CasellaTraguardo extends CasellaDecorator{
     }
 
     @Override
-    public void passaggio(Giocatore giocatore) {
-        super.passaggio(giocatore);
-        comportamentoAggiunto(giocatore);
+    public String passaggio(Giocatore giocatore) {
+        StringBuilder stbr = new StringBuilder();
+        stbr.append(super.passaggio(giocatore));
+        stbr.append(comportamentoAggiunto(giocatore));
+        return stbr.toString();
     }
 
-    private void comportamentoAggiunto(Giocatore giocatore) {
-        System.out.println("Giocatore ha raggiunto il Traguardo;");
+    private String comportamentoAggiunto(Giocatore giocatore) {
         giocatore.setHaVinto(true);
+        return "\nGiocatore ha raggiunto il Traguardo;";
     }
 
 }

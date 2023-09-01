@@ -9,20 +9,22 @@ public class CasellaPanchina extends CasellaDecorator{
     }
 
     @Override
-    public void passaggio(Giocatore giocatore) {
-        super.passaggio(giocatore);
-        comportamentoAggiunto(giocatore);
+    public String passaggio(Giocatore giocatore) {
+        StringBuilder stbr = new StringBuilder();
+        stbr.append(super.passaggio(giocatore));
+        stbr.append(comportamentoAggiunto(giocatore));
+        return stbr.toString();
     }
 
-    private void comportamentoAggiunto(Giocatore giocatore) {
+    private String comportamentoAggiunto(Giocatore giocatore) {
         if(!giocatore.getPossiedeDivietoSosta()){
-            System.out.println("Giocatore arriva su una Panchina, deve riposarsi per 1 turno;");
             giocatore.setAttesa(1);
+            return "\nGiocatore arriva su una Panchina, deve riposarsi per 1 turno;";
         }
         else{
-            System.out.println("Giocatore arriva su una Panchina, ma usa la carta Divieto di Sosta;");
             giocatore.setPossiedeDivietoSosta(false);
             giocatore.setUsatoDivietoSosta(true);
+            return "\nGiocatore arriva su una Panchina, ma usa la carta Divieto di Sosta;";
         }
     }
 

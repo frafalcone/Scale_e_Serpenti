@@ -12,15 +12,18 @@ public class CasellaSerpente extends CasellaDecorator{
     }
 
     @Override
-    public void passaggio(Giocatore giocatore) {
-        super.passaggio(giocatore);
-        comportamentoAggiunto(giocatore);
+    public String passaggio(Giocatore giocatore) {
+        StringBuilder stbr = new StringBuilder();
+        stbr.append(super.passaggio(giocatore));
+        stbr.append(comportamentoAggiunto(giocatore));
+        return stbr.toString();
     }
 
-    private void comportamentoAggiunto(Giocatore giocatore) {
-        System.out.println("Giocatore arriva su un Serpente, posizione: "+ giocatore.getPosizione());
+    private String comportamentoAggiunto(Giocatore giocatore) {
+        int posizionePrecedente = giocatore.getPosizione();
         giocatore.setPosizione(destinazione);
-        System.out.println("Giocatore scivola dal Serpente, posizione: "+ giocatore.getPosizione());
+        return "\nGiocatore arriva su un Serpente, posizione: "+ posizionePrecedente +";"
+         +"\nGiocatore scivola dal Serpente, posizione: "+ giocatore.getPosizione();
     }
 
 }

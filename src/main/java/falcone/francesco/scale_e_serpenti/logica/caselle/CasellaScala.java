@@ -12,15 +12,18 @@ public class CasellaScala extends CasellaDecorator{
     }
 
     @Override
-    public void passaggio(Giocatore giocatore) {
-        super.passaggio(giocatore);
-        comportamentoAggiunto(giocatore);
+    public String passaggio(Giocatore giocatore) {
+        StringBuilder stbr = new StringBuilder();
+        stbr.append(super.passaggio(giocatore));
+        stbr.append(comportamentoAggiunto(giocatore));
+        return stbr.toString();
     }
 
-    private void comportamentoAggiunto(Giocatore giocatore) {
-        System.out.println("Giocatore arriva su una Scala, posizione: "+ giocatore.getPosizione() +";");
+    private String comportamentoAggiunto(Giocatore giocatore) {
+        int posizionePrecedente = giocatore.getPosizione();
         giocatore.setPosizione(destinazione);
-        System.out.println("Giocatore sale la Scala, posizione: "+ giocatore.getPosizione() +";");
+        return "\nGiocatore arriva su una Scala, posizione: "+ posizionePrecedente +";"
+         + "\nGiocatore sale la Scala, posizione: "+ giocatore.getPosizione() +";";
     }
 
 

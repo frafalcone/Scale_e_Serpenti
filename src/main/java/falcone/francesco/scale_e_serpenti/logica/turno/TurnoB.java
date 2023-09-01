@@ -8,7 +8,9 @@ public class TurnoB extends TurnoAb{
         super();
     }
 
-    public void esegui(Giocatore giocatore){
+    public String esegui(Giocatore giocatore){
+
+        StringBuilder stbr = new StringBuilder();
 
         if(giocatore.getRigioca()){
             giocatore.setRigioca(false);
@@ -16,15 +18,17 @@ public class TurnoB extends TurnoAb{
 
         int risultatoDadi = lanciaDadoSingolo();
 
-        System.out.println("Giocatore lancia il dado: " +risultatoDadi);
+        stbr.append("\nGiocatore lancia il dado: " +risultatoDadi);
 
-        muovi(giocatore, risultatoDadi);
+        stbr.append(muovi(giocatore, risultatoDadi));
 
         if(giocatore.getHaVinto()){
-            return;
+            return stbr.toString();
         }
 
-        molla(giocatore, risultatoDadi);
-        rigioca(giocatore);
+        stbr.append(molla(giocatore, risultatoDadi));
+        stbr.append(rigioca(giocatore));
+
+        return stbr.toString();
     }
 }

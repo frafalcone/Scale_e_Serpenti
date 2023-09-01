@@ -16,6 +16,66 @@ public class CasellaPescaUnaCartaMod extends CasellaDecorator{
             creaMazzo();
     }
 
+
+
+    @Override
+    public String passaggio(Giocatore giocatore) {
+        StringBuilder stbr = new StringBuilder();
+        stbr.append(super.passaggio(giocatore));
+        stbr.append(comportamentoAggiunto(giocatore));
+        return stbr.toString();
+    }
+
+    private String comportamentoAggiunto(Giocatore giocatore) {
+        int cartaPescata = carte.getFirst();
+        carte.removeFirst();
+        if(cartaPescata==4)
+            giocatore.setPossiedeDivietoSosta(true);
+        if(cartaPescata!=4)
+            carte.addLast(cartaPescata);
+
+        switch (cartaPescata) {
+            case 0 -> {
+                giocatore.setRigioca(true);
+                return "\nGiocatore pesca la carta: Dadi;";
+            }
+            case 1 -> {
+                if (!giocatore.getPossiedeDivietoSosta()) {
+                    giocatore.setAttesa(1);
+                    return "\nGiocatore pesca la carta: Panchina;";
+                } else {
+                    giocatore.setPossiedeDivietoSosta(false);
+                    carte.addLast(4);
+                    return "\nGiocatore pesca la carta: Panchina; Ma usa Divieto di Sosta!";
+                }
+            }
+            case 2 -> {
+                giocatore.setMolla(true);
+                return "\nGiocatore pesca la carta: Molla;";
+            }
+            case 3 -> {
+                if (!giocatore.getPossiedeDivietoSosta()) {
+                    giocatore.setAttesa(3);
+                    return "\nGiocatore pesca la carta: Locanda;";
+                } else {
+                    giocatore.setPossiedeDivietoSosta(false);
+                    carte.addLast(4);
+                    return "\nGiocatore pesca la carta: Locanda; Ma usa Divieto di Sosta!";
+                }
+            }
+            case 4 -> {
+                giocatore.setPossiedeDivietoSosta(true);
+                return "\nGiocatore pesca la carta: Divieto di Sosta;";
+            }
+        }
+        return "";
+    }
+
+    public static void riconsegnaDivietoSosta(Giocatore giocatore){
+        giocatore.setUsatoDivietoSosta(false);
+        carte.addLast(4);
+    }
+
     public void creaMazzo(){
         carte = new LinkedList<>();
 
@@ -28,60 +88,5 @@ public class CasellaPescaUnaCartaMod extends CasellaDecorator{
 
         Collections.shuffle(carte);
         creato = true;
-    }
-
-    @Override
-    public void passaggio(Giocatore giocatore) {
-        super.passaggio(giocatore);
-        comportamentoAggiunto(giocatore);
-    }
-
-    private void comportamentoAggiunto(Giocatore giocatore) {
-        int cartaPescata = carte.getFirst();
-        carte.removeFirst();
-        if(cartaPescata==4)
-            giocatore.setPossiedeDivietoSosta(true);
-        if(cartaPescata!=4)
-            carte.addLast(cartaPescata);
-
-        switch (cartaPescata) {
-            case 0 -> {
-                System.out.println("Giocatore pesca la carta: Dadi;");
-                giocatore.setRigioca(true);
-            }
-            case 1 -> {
-                if (!giocatore.getPossiedeDivietoSosta()) {
-                    System.out.println("Giocatore pesca la carta: Panchina;");
-                    giocatore.setAttesa(1);
-                } else {
-                    System.out.println("Giocatore pesca la carta: Panchina; Ma usa Divieto di Sosta!");
-                    giocatore.setPossiedeDivietoSosta(false);
-                    carte.addLast(4);
-                }
-            }
-            case 2 -> {
-                System.out.println("Giocatore pesca la carta: Molla;");
-                giocatore.setMolla(true);
-            }
-            case 3 -> {
-                if (!giocatore.getPossiedeDivietoSosta()) {
-                    System.out.println("Giocatore pesca la carta: Locanda;");
-                    giocatore.setAttesa(3);
-                } else {
-                    System.out.println("Giocatore pesca la carta: Locanda; Ma usa Divieto di Sosta!");
-                    giocatore.setPossiedeDivietoSosta(false);
-                    carte.addLast(4);
-                }
-            }
-            case 4 -> {
-                System.out.println("Giocatore pesca la carta: Divieto di Sosta;");
-                giocatore.setPossiedeDivietoSosta(true);
-            }
-        }
-    }
-
-    public static void riconsegnaDivietoSosta(Giocatore giocatore){
-        giocatore.setUsatoDivietoSosta(false);
-        carte.addLast(4);
     }
 }

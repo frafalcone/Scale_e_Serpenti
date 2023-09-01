@@ -9,14 +9,16 @@ public class CasellaDadi extends CasellaDecorator{
     }
 
     @Override
-    public void passaggio(Giocatore giocatore) {
-        super.passaggio(giocatore);
-        comportamentoAggiunto(giocatore);
+    public String passaggio(Giocatore giocatore) {
+        StringBuilder stbr = new StringBuilder();
+        stbr.append(super.passaggio(giocatore));
+        stbr.append(comportamentoAggiunto(giocatore));
+        return stbr.toString();
     }
 
-    private void comportamentoAggiunto(Giocatore giocatore) {
-        System.out.println("Giocatore ottiene di nuovo i Dadi;");
+    private String comportamentoAggiunto(Giocatore giocatore) {
         giocatore.setRigioca(true);
+        return "\nGiocatore ottiene di nuovo i Dadi;";
     }
 
 }

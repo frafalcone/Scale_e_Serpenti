@@ -9,8 +9,8 @@ public abstract class CasellaDecorator implements CasellaIF{
         this.casellaAssegnata = casellaAssegnata;
     }
 
-    public void passaggio (Giocatore giocatore){
-        casellaAssegnata.passaggio(giocatore);
+    public String passaggio (Giocatore giocatore){
+        return casellaAssegnata.passaggio(giocatore);
     }
 
     public int getIndiceCasella() {

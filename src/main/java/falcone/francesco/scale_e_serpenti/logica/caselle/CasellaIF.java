@@ -3,7 +3,7 @@ package falcone.francesco.scale_e_serpenti.logica.caselle;
 import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
 
 public interface CasellaIF {
-    void passaggio(Giocatore giocatore);
+    String passaggio(Giocatore giocatore);
     boolean getAssegnata();
     int getIndiceCasella();
     void setAssegnata(boolean assegnata);
