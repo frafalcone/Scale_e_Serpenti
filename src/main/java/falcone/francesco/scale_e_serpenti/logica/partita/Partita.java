@@ -260,7 +260,7 @@ public class Partita {
 
 
 
-    public void giocaDaTerminale(){
+    private void giocaDaTerminale(){
         menuTerminale();
     }
 
@@ -537,7 +537,7 @@ public class Partita {
 
     }
 
-    private void gameInitAndLoopTerminale(){
+    public void gameInitAndLoopTerminale(){
 
         boolean finito = false;
         int turno = 0;
