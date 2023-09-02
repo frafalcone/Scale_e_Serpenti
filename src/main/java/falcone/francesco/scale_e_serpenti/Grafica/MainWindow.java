@@ -1,15 +1,27 @@
 package falcone.francesco.scale_e_serpenti.Grafica;
 
+import falcone.francesco.scale_e_serpenti.logica.caselle.*;
 import falcone.francesco.scale_e_serpenti.logica.partita.Partita;
+
+import falcone.francesco.scale_e_serpenti.logica.tabellone.Tabellone;
+import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneIF;
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -49,6 +61,11 @@ public class MainWindow extends Application {
     }
 
     private static Parent schermataIniziale(Scene scene, Stage stage){
+
+        stage.setWidth(640);
+        stage.setHeight(480);
+        stage.centerOnScreen();
+
         VBox root = new VBox();
         root.setPrefSize(640, 480);
         root.setSpacing(50);
@@ -105,6 +122,10 @@ public class MainWindow extends Application {
     }
 
     private static Parent schermataCreazione(Scene scene, Stage stage){
+
+        stage.setWidth(640);
+        stage.setHeight(480);
+        stage.centerOnScreen();
 
         VBox root = new VBox();
         root.setPrefSize(640, 480);
@@ -298,7 +319,6 @@ public class MainWindow extends Application {
                     }
 
                     BtestoRegolaQuattro.setDisable(!casellaPremio);
-                    System.out.println(Arrays.toString(parametri));
                 });
 
         checkRegolaDue.selectedProperty().addListener(
@@ -312,7 +332,6 @@ public class MainWindow extends Application {
                     }
 
                     BtestoRegolaCinque.setDisable(!casellaSosta);
-                    System.out.println(Arrays.toString(parametri));
                 });
 
         checkRegolaTre.selectedProperty().addListener(
@@ -332,7 +351,6 @@ public class MainWindow extends Application {
                     }
 
                     BtestoRegolaSei.setDisable(!casellaPescaCarta);
-                    System.out.println(Arrays.toString(parametri));
                 });
 
         checkRegolaQuattro.selectedProperty().addListener(
@@ -352,8 +370,6 @@ public class MainWindow extends Application {
                     } else {
                         parametri[4] = 0;
                     }
-
-                    System.out.println(Arrays.toString(parametri));
                 });
 
         checkRegolaCinque.selectedProperty().addListener(
@@ -370,8 +386,6 @@ public class MainWindow extends Application {
                     } else {
                         parametri[5] = 0;
                     }
-
-                    System.out.println(Arrays.toString(parametri));
                 });
 
         checkRegolaSei.selectedProperty().addListener(
@@ -388,8 +402,6 @@ public class MainWindow extends Application {
                     } else {
                         parametri[6] = 0;
                     }
-
-                    System.out.println(Arrays.toString(parametri));
                 });
 
         checkRegolaSette.selectedProperty().addListener(
@@ -400,8 +412,6 @@ public class MainWindow extends Application {
                     } else {
                         parametri[7] = 0;
                     }
-
-                    System.out.println(Arrays.toString(parametri));
                 });
 
 
@@ -591,7 +601,8 @@ public class MainWindow extends Application {
                     partita.passaParametri(parametri);
                     partita.configuraPartita();
 
-                    partita.gameInitAndLoopTerminale();
+                    actualScene = schermataGioco(scene, stage);
+                    scene.setRoot(actualScene);
             }
         });
 
@@ -603,6 +614,113 @@ public class MainWindow extends Application {
 
         return content;
     }
+
+    private static Parent schermataGioco(Scene scene, Stage stage){
+
+        stage.setWidth(1280);
+        stage.setHeight(720);
+        stage.centerOnScreen();
+
+        HBox root = new HBox();
+
+        root.setAlignment(Pos.CENTER);
+        root.setSpacing(50);
+
+        VBox menuLaterale = new VBox();
+        menuLaterale.setMinSize(450, 720);
+
+        VBox tabelloneBg = new VBox();
+        tabelloneBg.setAlignment(Pos.CENTER);
+
+        StackPane tabellone = new StackPane();
+
+        Rectangle backGroundCanvas_0 = new Rectangle(670,670, Color.DARKGRAY);
+        Rectangle backGroundCanvas_1 = new Rectangle(650,650, Color.LIGHTGRAY);
+
+        Canvas canvas = new Canvas(600,600);
+        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+
+        disegnaTabellone(graphicsContext);
+
+        tabellone.setAlignment(Pos.CENTER);
+
+        tabellone.getChildren().addAll(backGroundCanvas_0, backGroundCanvas_1, canvas);
+        tabelloneBg.getChildren().add(tabellone);
+
+        root.getChildren().add(menuLaterale);
+        root.getChildren().add(tabelloneBg);
+
+        Parent content = root;
+
+        return content;
+    }
+
+    private static void disegnaTabellone(GraphicsContext gc) {
+        gc.rect(0,0,600, 600);
+
+        gc.setFill(Color.BEIGE);
+        gc.fillRect(0, 0, 600, 600);
+
+        TabelloneIF tabellone = Partita.getPartita().getTabellone();
+
+        int righe = Partita.getPartita().getimpostazioniTabellone().getRighe();
+        int colonne = Partita.getPartita().getimpostazioniTabellone().getColonne();
+
+        double casellaX = 600 / (double) righe;
+        double casellaY = 600 / (double) colonne;
+
+        int posizione = 1;
+
+        for(int i=righe-1; i>=0; i--){
+            for (int j=0; j<colonne; j++){
+
+                double v = (double) j*(casellaY);
+                double v1 = (double) (i)*(casellaX);
+                double v2 = (double) casellaY;
+                double v3 = (double) casellaX;
+
+                if(tabellone.getCasella(posizione) instanceof CasellaScala){
+                    gc.setFill(Color.LIGHTGRAY);
+                    gc.fillRect(v,v1,v2, v3);
+                } else if (tabellone.getCasella(posizione) instanceof CasellaSerpente) {
+                    gc.setFill(Color.LIGHTGREEN);
+                    gc.fillRect(v,v1,v2, v3);
+                } else if (tabellone.getCasella(posizione) instanceof CasellaDadi) {
+                    gc.setFill(Color.LIGHTCORAL);
+                    gc.fillRect(v,v1,v2, v3);
+                } else if (tabellone.getCasella(posizione) instanceof CasellaMolla) {
+                    gc.setFill(Color.LIGHTPINK);
+                    gc.fillRect(v,v1,v2, v3);
+                } else if (tabellone.getCasella(posizione) instanceof CasellaPanchina) {
+                    gc.setFill(Color.LIGHTBLUE);
+                    gc.fillRect(v,v1,v2, v3);
+                } else if (tabellone.getCasella(posizione) instanceof CasellaLocanda) {
+                    gc.setFill(Color.LIGHTBLUE);
+                    gc.fillRect(v,v1,v2, v3);
+                } else if (tabellone.getCasella(posizione) instanceof CasellaPescaUnaCarta || tabellone.getCasella(posizione) instanceof CasellaPescaUnaCartaMod) {
+                    gc.setFill(Color.LIGHTYELLOW);
+                    gc.fillRect(v,v1,v2, v3);
+                } else if (tabellone.getCasella(posizione) instanceof CasellaTraguardo) {
+                    gc.setFill(Color.WHITE);
+                    gc.fillRect(v,v1,v2, v3);
+                } else if (posizione==1){
+                    gc.setFill(Color.LIGHTSLATEGRAY);
+                    gc.fillRect(v,v1,v2, v3);
+                }
+
+                gc.setFill(Color.BLACK);
+
+                gc.fillText(posizione+"", (j)*casellaY+3, (i+1)*casellaX-4);
+                gc.rect(v,v1,v2, v3);
+
+                posizione++;
+            }
+        }
+
+        gc.stroke();
+    }
+
+
 
     private static void errorCheck(){
         StringBuilder errorLog = new StringBuilder();

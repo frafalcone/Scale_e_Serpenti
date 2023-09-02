@@ -203,12 +203,25 @@ public class Partita {
         }
     }
 
+    public ImpostazioniRegole getimpostazioniRegole() {
+        return impostazioniRegole;
+    }
 
+    public ImpostazioniCaselle getimpostazioniCaselle() {
+        return impostazioniCaselle;
+    }
 
+    public ImpostazioniTabellone getimpostazioniTabellone() {
+        return impostazioniTabellone;
+    }
 
+    public ImpostazioniGiocatori getimpostazioniGiocatori() {
+        return impostazioniGiocatori;
+    }
 
-
-
+    public TabelloneIF getTabellone(){
+        return tabellone;
+    }
 
 
     private void giocaDaTerminale(){

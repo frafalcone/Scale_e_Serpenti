@@ -41,7 +41,7 @@ public class Tabellone implements TabelloneIF{
                 }
             }
         } else {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Casella non esistente");
         }
         return res;
     }

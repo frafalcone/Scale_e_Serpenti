@@ -37,16 +37,22 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
             int indiceCodaSerpente;
             boolean posizionato = false;
 
+
             while(!posizionato){
                 indiceTestaSerpente = random.nextInt(1, dimensione)+1;
                 indiceCodaSerpente = random.nextInt(1, indiceTestaSerpente);
                 if(!tabellone.getCasella(indiceTestaSerpente).getAssegnata() || !tabellone.getCasella(indiceCodaSerpente).getAssegnata()){
                     CasellaIF casella = new CasellaSerpente(tabellone.getCasella(indiceTestaSerpente), indiceCodaSerpente);
+                    if(casella.getIndiceCasella()==-1)
+                        break;
                     casella.setAssegnata(true);
                     tabellone.setCasella(casella);
                     tabellone.getCasella(indiceCodaSerpente).setAssegnata(true);
                     numeroSerpenti--;
                     posizionato = true;
+                }
+                else {
+                    posizionato = false;
                 }
             }
         }
@@ -70,6 +76,8 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
                 indiceFineScala = random.nextInt(indiceBaseScala, dimensione)+1;
                 if(!traguardoAssegnato && (indiceFineScala == dimensione)){
                     CasellaIF casella = new CasellaScala(tabellone.getCasella(indiceBaseScala), indiceFineScala);
+                    if(casella.getIndiceCasella()==-1)
+                        break;
                     casella.setAssegnata(true);
                     tabellone.setCasella(casella);
                     tabellone.getCasella(indiceFineScala).setAssegnata(true);
@@ -79,11 +87,16 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
                 }
                 else if(!tabellone.getCasella(indiceFineScala).getAssegnata() || !tabellone.getCasella(indiceBaseScala).getAssegnata()){
                     CasellaIF casella = new CasellaScala(tabellone.getCasella(indiceBaseScala), indiceFineScala);
+                    if(casella.getIndiceCasella()==-1)
+                        break;
                     casella.setAssegnata(true);
                     tabellone.setCasella(casella);
                     tabellone.getCasella(indiceFineScala).setAssegnata(true);
                     numeroScale--;
                     posizionato = true;
+                }
+                else {
+                    posizionato = false;
                 }
             }
         }
@@ -104,12 +117,16 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
                 if(!tabellone.getCasella(indiceCasella).getAssegnata()){
                     if ((random.nextInt(0,9)+1)%2==0){
                         CasellaIF casella =  new CasellaPanchina(tabellone.getCasella(indiceCasella));
+                        if(casella.getIndiceCasella()==-1)
+                            break;
                         casella.setAssegnata(true);
                         tabellone.setCasella(casella);
 
                     }
                     else {
                         CasellaIF casella = new CasellaLocanda(tabellone.getCasella(indiceCasella));
+                        if(casella.getIndiceCasella()==-1)
+                            break;
                         casella.setAssegnata(true);
                         tabellone.setCasella(casella);
                     }
@@ -135,11 +152,15 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
                 if(!tabellone.getCasella(indiceCasella).getAssegnata()){
                     if ((random.nextInt(0,9)+1)%2==0){
                         CasellaIF casella = new CasellaDadi(tabellone.getCasella(indiceCasella));
+                        if(casella.getIndiceCasella()==-1)
+                            break;
                         casella.setAssegnata(true);
                         tabellone.setCasella(casella);
                     }
                     else {
                         CasellaIF casella = new CasellaMolla(tabellone.getCasella(indiceCasella));
+                        if(casella.getIndiceCasella()==-1)
+                            break;
                         casella.setAssegnata(true);
                         tabellone.setCasella(casella);
                     }
@@ -164,6 +185,8 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
                 indiceCasella = random.nextInt(2, dimensione);
                 if(!tabellone.getCasella(indiceCasella).getAssegnata()){
                     CasellaIF casella = new CasellaPescaUnaCarta(tabellone.getCasella(indiceCasella));
+                    if(casella.getIndiceCasella()==-1)
+                        break;
                     casella.setAssegnata(true);
                     tabellone.setCasella(casella);
                     posizionato=true;
@@ -187,6 +210,8 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
                 indiceCasella = random.nextInt(2, dimensione);
                 if(!tabellone.getCasella(indiceCasella).getAssegnata()){
                     CasellaIF casella = new CasellaPescaUnaCartaMod(tabellone.getCasella(indiceCasella));
+                    if(casella.getIndiceCasella()==-1)
+                        break;
                     casella.setAssegnata(true);
                     tabellone.setCasella(casella);
                     posizionato=true;
