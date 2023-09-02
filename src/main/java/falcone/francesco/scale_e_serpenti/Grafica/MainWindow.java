@@ -634,8 +634,8 @@ public class MainWindow extends Application {
 
         StackPane tabellone = new StackPane();
 
-        Rectangle backGroundCanvas_0 = new Rectangle(670,670, Color.DARKGRAY);
-        Rectangle backGroundCanvas_1 = new Rectangle(650,650, Color.LIGHTGRAY);
+        Rectangle backGroundCanvas_0 = new Rectangle(655,655, Color.BLACK);
+        Rectangle backGroundCanvas_1 = new Rectangle(650,650, Color.ROSYBROWN);
 
         Canvas canvas = new Canvas(600,600);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
@@ -671,49 +671,96 @@ public class MainWindow extends Application {
 
         int posizione = 1;
 
-        for(int i=righe-1; i>=0; i--){
-            for (int j=0; j<colonne; j++){
+        for(int i=righe-1; i>=0; i--) {
+            if (i % 2 != 0){
+                    for (int j = 0; j < colonne; j++) {
 
-                double v = (double) j*(casellaY);
-                double v1 = (double) (i)*(casellaX);
-                double v2 = (double) casellaY;
-                double v3 = (double) casellaX;
+                        double v = (double) j * (casellaY);
+                        double v1 = (double) (i) * (casellaX);
+                        double v2 = casellaY;
+                        double v3 = casellaX;
 
-                if(tabellone.getCasella(posizione) instanceof CasellaScala){
-                    gc.setFill(Color.LIGHTGRAY);
-                    gc.fillRect(v,v1,v2, v3);
-                } else if (tabellone.getCasella(posizione) instanceof CasellaSerpente) {
-                    gc.setFill(Color.LIGHTGREEN);
-                    gc.fillRect(v,v1,v2, v3);
-                } else if (tabellone.getCasella(posizione) instanceof CasellaDadi) {
-                    gc.setFill(Color.LIGHTCORAL);
-                    gc.fillRect(v,v1,v2, v3);
-                } else if (tabellone.getCasella(posizione) instanceof CasellaMolla) {
-                    gc.setFill(Color.LIGHTPINK);
-                    gc.fillRect(v,v1,v2, v3);
-                } else if (tabellone.getCasella(posizione) instanceof CasellaPanchina) {
-                    gc.setFill(Color.LIGHTBLUE);
-                    gc.fillRect(v,v1,v2, v3);
-                } else if (tabellone.getCasella(posizione) instanceof CasellaLocanda) {
-                    gc.setFill(Color.LIGHTBLUE);
-                    gc.fillRect(v,v1,v2, v3);
-                } else if (tabellone.getCasella(posizione) instanceof CasellaPescaUnaCarta || tabellone.getCasella(posizione) instanceof CasellaPescaUnaCartaMod) {
-                    gc.setFill(Color.LIGHTYELLOW);
-                    gc.fillRect(v,v1,v2, v3);
-                } else if (tabellone.getCasella(posizione) instanceof CasellaTraguardo) {
-                    gc.setFill(Color.WHITE);
-                    gc.fillRect(v,v1,v2, v3);
-                } else if (posizione==1){
-                    gc.setFill(Color.LIGHTSLATEGRAY);
-                    gc.fillRect(v,v1,v2, v3);
+                        if (tabellone.getCasella(posizione) instanceof CasellaScala) {
+                            gc.setFill(Color.LIGHTGRAY);
+                            gc.fillRect(v, v1, v2, v3);
+                        } else if (tabellone.getCasella(posizione) instanceof CasellaSerpente) {
+                            gc.setFill(Color.LIGHTGREEN);
+                            gc.fillRect(v, v1, v2, v3);
+                        } else if (tabellone.getCasella(posizione) instanceof CasellaDadi) {
+                            gc.setFill(Color.LIGHTSALMON);
+                            gc.fillRect(v, v1, v2, v3);
+                        } else if (tabellone.getCasella(posizione) instanceof CasellaMolla) {
+                            gc.setFill(Color.LIGHTPINK);
+                            gc.fillRect(v, v1, v2, v3);
+                        } else if (tabellone.getCasella(posizione) instanceof CasellaPanchina) {
+                            gc.setFill(Color.LIGHTCYAN);
+                            gc.fillRect(v, v1, v2, v3);
+                        } else if (tabellone.getCasella(posizione) instanceof CasellaLocanda) {
+                            gc.setFill(Color.LIGHTBLUE);
+                            gc.fillRect(v, v1, v2, v3);
+                        } else if (tabellone.getCasella(posizione) instanceof CasellaPescaUnaCarta || tabellone.getCasella(posizione) instanceof CasellaPescaUnaCartaMod) {
+                            gc.setFill(Color.ORANGE);
+                            gc.fillRect(v, v1, v2, v3);
+                        } else if (tabellone.getCasella(posizione) instanceof CasellaTraguardo) {
+                            gc.setFill(Color.WHITE);
+                            gc.fillRect(v, v1, v2, v3);
+                        } else if (posizione == 1) {
+                            gc.setFill(Color.LIGHTSLATEGRAY);
+                            gc.fillRect(v, v1, v2, v3);
+                        }
+
+                        gc.setFill(Color.BLACK);
+
+                        gc.fillText(posizione + "", (j) * casellaY + 3, (i + 1) * casellaX - 4);
+                        gc.rect(v, v1, v2, v3);
+
+                        posizione++;
+                    }
+            }
+            else {
+                for (int j = colonne-1; j >= 0; j--) {
+
+                    double v = (double) j * (casellaY);
+                    double v1 = (double) (i) * (casellaX);
+                    double v2 = (double) casellaY;
+                    double v3 = (double) casellaX;
+
+                    if (tabellone.getCasella(posizione) instanceof CasellaScala) {
+                        gc.setFill(Color.LIGHTGRAY);
+                        gc.fillRect(v, v1, v2, v3);
+                    } else if (tabellone.getCasella(posizione) instanceof CasellaSerpente) {
+                        gc.setFill(Color.LIGHTGREEN);
+                        gc.fillRect(v, v1, v2, v3);
+                    } else if (tabellone.getCasella(posizione) instanceof CasellaDadi) {
+                        gc.setFill(Color.PINK);
+                        gc.fillRect(v, v1, v2, v3);
+                    } else if (tabellone.getCasella(posizione) instanceof CasellaMolla) {
+                        gc.setFill(Color.LIGHTSALMON);
+                        gc.fillRect(v, v1, v2, v3);
+                    } else if (tabellone.getCasella(posizione) instanceof CasellaPanchina) {
+                        gc.setFill(Color.LIGHTCYAN);
+                        gc.fillRect(v, v1, v2, v3);
+                    } else if (tabellone.getCasella(posizione) instanceof CasellaLocanda) {
+                        gc.setFill(Color.LIGHTBLUE);
+                        gc.fillRect(v, v1, v2, v3);
+                    } else if (tabellone.getCasella(posizione) instanceof CasellaPescaUnaCarta || tabellone.getCasella(posizione) instanceof CasellaPescaUnaCartaMod) {
+                        gc.setFill(Color.ORANGE);
+                        gc.fillRect(v, v1, v2, v3);
+                    } else if (tabellone.getCasella(posizione) instanceof CasellaTraguardo) {
+                        gc.setFill(Color.WHITE);
+                        gc.fillRect(v, v1, v2, v3);
+                    } else if (posizione == 1) {
+                        gc.setFill(Color.LIGHTSLATEGRAY);
+                        gc.fillRect(v, v1, v2, v3);
+                    }
+
+                    gc.setFill(Color.BLACK);
+
+                    gc.fillText(posizione + "", (j) * casellaY + 3, (i + 1) * casellaX - 4);
+                    gc.rect(v, v1, v2, v3);
+
+                    posizione++;
                 }
-
-                gc.setFill(Color.BLACK);
-
-                gc.fillText(posizione+"", (j)*casellaY+3, (i+1)*casellaX-4);
-                gc.rect(v,v1,v2, v3);
-
-                posizione++;
             }
         }
 
