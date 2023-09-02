@@ -172,63 +172,48 @@ public class Partita {
                 switch (fase){
                     case 0 -> {
                        impostazioniGiocatori.setNumeroGiocatori(Integer.parseInt(str));
-                       break;
                     }
                     case 1 -> {
                         impostazioniCaselle.setCasellaPremio(Boolean.parseBoolean(str));
-                        break;
                     }
                     case 2 -> {
                         impostazioniCaselle.setCasellaSosta(Boolean.parseBoolean(str));
-                        break;
                     }
                     case 3 -> {
                         impostazioniCaselle.setCasellaPescaUnaCarta(Boolean.parseBoolean(str));
-                        break;
                     }
                     case 4 -> {
                         impostazioniRegole.setDadoSingolo(Boolean.parseBoolean(str));
-                        break;
                     }
                     case 5 -> {
                         impostazioniRegole.setDoppioSei(Boolean.parseBoolean(str));
-                        break;
                     }
                     case 6 -> {
                         impostazioniRegole.setLancioSingolo(Boolean.parseBoolean(str));
-                        break;
                     }
                     case 7 -> {
                         impostazioniCaselle.setUlterioriCarte(Boolean.parseBoolean(str));
-                        break;
                     }
                     case 8 -> {
                         impostazioniTabellone.setRighe(Integer.parseInt(str));
-                        break;
                     }
                     case 9 -> {
                         impostazioniTabellone.setColonne(Integer.parseInt(str));
-                        break;
                     }
                     case 10 -> {
                         impostazioniTabellone.setNumeroScale(Integer.parseInt(str));
-                        break;
                     }
                     case 11 -> {
                         impostazioniTabellone.setNumeroSerpenti(Integer.parseInt(str));
-                        break;
                     }
                     case 12 -> {
                         impostazioniTabellone.setNumeroCasellePremio(Integer.parseInt(str));
-                        break;
                     }
                     case 13 -> {
                         impostazioniTabellone.setNumeroCaselleSosta(Integer.parseInt(str));
-                        break;
                     }
                     case 14 -> {
                         impostazioniTabellone.setNumeroCasellePescaUnaCarta(Integer.parseInt(str));
-                        break;
                     }
                     default -> throw new IllegalStateException("Errore nella fase: " + fase);
                 }
