@@ -46,51 +46,36 @@ public class Partita {
     public void passaParametri(int[] parametri){
         for(int i=0; i<parametri.length; i++){
             switch (i){
-                case 0 -> {
-                    impostazioniGiocatori.setNumeroGiocatori(parametri[i]);
-                }
-                case 1 -> {
-                    impostazioniCaselle.setCasellaPremio(parametri[i] == 1);
-                }
-                case 2 -> {
-                    impostazioniCaselle.setCasellaSosta(parametri[i] == 1);
-                }
-                case 3 -> {
-                    impostazioniCaselle.setCasellaPescaUnaCarta(parametri[i] == 1);
-                }
-                case 4 -> {
-                    impostazioniCaselle.setUlterioriCarte(parametri[i] == 1);
-                }
-                case 5 -> {
-                    impostazioniRegole.setDadoSingolo(parametri[i] == 1);
-                }
-                case 6 -> {
-                    impostazioniRegole.setDoppioSei(parametri[i] == 1);
-                }
-                case 7 -> {
-                    impostazioniRegole.setLancioSingolo(parametri[i] == 1);
-                }
-                case 8 -> {
-                    impostazioniTabellone.setRighe(parametri[i]);
-                }
-                case 9 -> {
-                    impostazioniTabellone.setColonne(parametri[i]);
-                }
-                case 10 -> {
-                    impostazioniTabellone.setNumeroScale(parametri[i]);
-                }
-                case 11 -> {
-                    impostazioniTabellone.setNumeroSerpenti(parametri[i]);
-                }
-                case 12 -> {
-                    impostazioniTabellone.setNumeroCasellePremio(parametri[i]);
-                }
-                case 13 -> {
-                    impostazioniTabellone.setNumeroCaselleSosta(parametri[i]);
-                }
-                case 14 -> {
-                    impostazioniTabellone.setNumeroCasellePescaUnaCarta(parametri[i]);
-                }
+                case 0 -> impostazioniGiocatori.setNumeroGiocatori(parametri[i]);
+
+                case 1 -> impostazioniCaselle.setCasellaPremio(parametri[i] == 1);
+
+                case 2 -> impostazioniCaselle.setCasellaSosta(parametri[i] == 1);
+
+                case 3 -> impostazioniCaselle.setCasellaPescaUnaCarta(parametri[i] == 1);
+
+                case 4 -> impostazioniCaselle.setUlterioriCarte(parametri[i] == 1);
+
+                case 5 -> impostazioniRegole.setDadoSingolo(parametri[i] == 1);
+
+                case 6 -> impostazioniRegole.setDoppioSei(parametri[i] == 1);
+
+                case 7 -> impostazioniRegole.setLancioSingolo(parametri[i] == 1);
+
+                case 8 -> impostazioniTabellone.setRighe(parametri[i]);
+
+                case 9 -> impostazioniTabellone.setColonne(parametri[i]);
+
+                case 10 -> impostazioniTabellone.setNumeroScale(parametri[i]);
+
+                case 11 -> impostazioniTabellone.setNumeroSerpenti(parametri[i]);
+
+                case 12 -> impostazioniTabellone.setNumeroCasellePremio(parametri[i]);
+
+                case 13 -> impostazioniTabellone.setNumeroCaselleSosta(parametri[i]);
+
+                case 14 -> impostazioniTabellone.setNumeroCasellePescaUnaCarta(parametri[i]);
+
             }
         }
     }
@@ -170,51 +155,36 @@ public class Partita {
             
             while ((str = br.readLine()) != null){
                 switch (fase){
-                    case 0 -> {
-                       impostazioniGiocatori.setNumeroGiocatori(Integer.parseInt(str));
-                    }
-                    case 1 -> {
-                        impostazioniCaselle.setCasellaPremio(Boolean.parseBoolean(str));
-                    }
-                    case 2 -> {
-                        impostazioniCaselle.setCasellaSosta(Boolean.parseBoolean(str));
-                    }
-                    case 3 -> {
-                        impostazioniCaselle.setCasellaPescaUnaCarta(Boolean.parseBoolean(str));
-                    }
-                    case 4 -> {
-                        impostazioniRegole.setDadoSingolo(Boolean.parseBoolean(str));
-                    }
-                    case 5 -> {
-                        impostazioniRegole.setDoppioSei(Boolean.parseBoolean(str));
-                    }
-                    case 6 -> {
-                        impostazioniRegole.setLancioSingolo(Boolean.parseBoolean(str));
-                    }
-                    case 7 -> {
-                        impostazioniCaselle.setUlterioriCarte(Boolean.parseBoolean(str));
-                    }
-                    case 8 -> {
-                        impostazioniTabellone.setRighe(Integer.parseInt(str));
-                    }
-                    case 9 -> {
-                        impostazioniTabellone.setColonne(Integer.parseInt(str));
-                    }
-                    case 10 -> {
-                        impostazioniTabellone.setNumeroScale(Integer.parseInt(str));
-                    }
-                    case 11 -> {
-                        impostazioniTabellone.setNumeroSerpenti(Integer.parseInt(str));
-                    }
-                    case 12 -> {
-                        impostazioniTabellone.setNumeroCasellePremio(Integer.parseInt(str));
-                    }
-                    case 13 -> {
-                        impostazioniTabellone.setNumeroCaselleSosta(Integer.parseInt(str));
-                    }
-                    case 14 -> {
-                        impostazioniTabellone.setNumeroCasellePescaUnaCarta(Integer.parseInt(str));
-                    }
+                    case 0 -> impostazioniGiocatori.setNumeroGiocatori(Integer.parseInt(str));
+
+                    case 1 -> impostazioniCaselle.setCasellaPremio(Boolean.parseBoolean(str));
+
+                    case 2 -> impostazioniCaselle.setCasellaSosta(Boolean.parseBoolean(str));
+
+                    case 3 -> impostazioniCaselle.setCasellaPescaUnaCarta(Boolean.parseBoolean(str));
+
+                    case 4 -> impostazioniRegole.setDadoSingolo(Boolean.parseBoolean(str));
+
+                    case 5 -> impostazioniRegole.setDoppioSei(Boolean.parseBoolean(str));
+
+                    case 6 -> impostazioniRegole.setLancioSingolo(Boolean.parseBoolean(str));
+
+                    case 7 -> impostazioniCaselle.setUlterioriCarte(Boolean.parseBoolean(str));
+
+                    case 8 -> impostazioniTabellone.setRighe(Integer.parseInt(str));
+
+                    case 9 -> impostazioniTabellone.setColonne(Integer.parseInt(str));
+
+                    case 10 -> impostazioniTabellone.setNumeroScale(Integer.parseInt(str));
+
+                    case 11 -> impostazioniTabellone.setNumeroSerpenti(Integer.parseInt(str));
+
+                    case 12 -> impostazioniTabellone.setNumeroCasellePremio(Integer.parseInt(str));
+
+                    case 13 -> impostazioniTabellone.setNumeroCaselleSosta(Integer.parseInt(str));
+
+                    case 14 -> impostazioniTabellone.setNumeroCasellePescaUnaCarta(Integer.parseInt(str));
+
                     default -> throw new IllegalStateException("Errore nella fase: " + fase);
                 }
                 fase++;
