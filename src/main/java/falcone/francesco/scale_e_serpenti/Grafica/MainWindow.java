@@ -692,7 +692,7 @@ public class MainWindow extends Application {
 
 
 
-            Label label = new Label("The exception stacktrace was:");
+            Label label = new Label("Lista degli errori:");
 
             TextArea textArea = new TextArea(errorLog.toString());
             textArea.setEditable(false);

@@ -91,10 +91,6 @@ public class Partita {
         sistemaTurni.setTabellone(tabellone);
     }
 
-
-
-
-
     public void salvaPartita(String nomeConfigurazione){
             try {
                 FileWriter flwr = new FileWriter(nomeConfigurazione);
