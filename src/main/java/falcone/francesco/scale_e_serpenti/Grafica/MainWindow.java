@@ -754,7 +754,7 @@ public class MainWindow extends Application {
                                             graphicsContextTb.setFill(Color.YELLOW);
                                             graphicsContextTb.fillRect((posizioneSuTabelloneY)+(Partita.getPartita().getTabellone().getColonne()/2)+(casellaY/4), posizioneSuTabelloneX+(Partita.getPartita().getTabellone().getRighe()/2)+(casellaX/4), (casellaY/2)-Partita.getPartita().getTabellone().getColonne(), (casellaX/2)-Partita.getPartita().getTabellone().getRighe());
                                             graphicsContextTb.setFill(Color.BLACK);
-                                            graphicsContextTb.fillText((i+1)+"",(posizioneSuTabelloneY+((casellaY)/2.25)), posizioneSuTabelloneX+((casellaX)/1.75));
+                                            graphicsContextTb.fillText((i)+"",(posizioneSuTabelloneY+((casellaY)/2.25)), posizioneSuTabelloneX+((casellaX)/1.75));
 
                                         }
 
@@ -872,7 +872,7 @@ public class MainWindow extends Application {
                                 graphicsContextTb.setFill(Color.YELLOW);
                                 graphicsContextTb.fillRect((posizioneSuTabelloneY)+(Partita.getPartita().getTabellone().getColonne()/2)+(casellaY/4), posizioneSuTabelloneX+(Partita.getPartita().getTabellone().getRighe()/2)+(casellaX/4), (casellaY/2)-Partita.getPartita().getTabellone().getColonne(), (casellaX/2)-Partita.getPartita().getTabellone().getRighe());
                                 graphicsContextTb.setFill(Color.BLACK);
-                                graphicsContextTb.fillText((i+1)+"",(posizioneSuTabelloneY+((casellaY)/2.25)), posizioneSuTabelloneX+((casellaX)/1.75));
+                                graphicsContextTb.fillText((i)+"",(posizioneSuTabelloneY+((casellaY)/2.25)), posizioneSuTabelloneX+((casellaX)/1.75));
 
                             }
 
