@@ -1,13 +1,13 @@
 package falcone.francesco.scale_e_serpenti.Grafica;
 
 import falcone.francesco.scale_e_serpenti.logica.caselle.*;
+import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
 import falcone.francesco.scale_e_serpenti.logica.partita.Partita;
-
-import falcone.francesco.scale_e_serpenti.logica.tabellone.Tabellone;
 import falcone.francesco.scale_e_serpenti.logica.tabellone.TabelloneIF;
+
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -27,6 +26,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainWindow extends Application {
@@ -84,31 +84,26 @@ public class MainWindow extends Application {
         nuova.setFocusTraversable(false);
         carica.setFocusTraversable(false);
 
-        nuova.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                actualScene = schermataCreazione(scene, stage);
-                scene.setRoot(actualScene);
-            }
+        nuova.setOnMouseClicked(mouseEvent -> {
+            actualScene = schermataCreazione(scene, stage);
+            scene.setRoot(actualScene);
         });
 
-        carica.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                FileChooser fileChooser = new FileChooser();
+        carica.setOnMouseClicked(mouseEvent -> {
+            FileChooser fileChooser = new FileChooser();
 
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SAVE files (*.save)", "*.save");
-                fileChooser.getExtensionFilters().add(extFilter);
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SAVE files (*.save)", "*.save");
+            fileChooser.getExtensionFilters().add(extFilter);
 
-                File file = fileChooser.showOpenDialog(stage);
+            File file = fileChooser.showOpenDialog(stage);
 
-                if (file != null) {
-                    Partita partita = Partita.getPartita();
-                    partita.inizializzaPartita();
-                    partita.caricaPartita(file.getAbsolutePath());
+            if (file != null) {
+                Partita partita = Partita.getPartita();
+                partita.inizializzaPartita();
+                partita.caricaPartita(file.getAbsolutePath());
 
-                    partita.gameInitAndLoopTerminale();
-                }
+                actualScene = schermataGioco(scene, stage);
+                scene.setRoot(actualScene);
             }
         });
 
@@ -496,29 +491,69 @@ public class MainWindow extends Application {
         inizia.setPrefSize(150,25);
         inizia.setFocusTraversable(false);
 
-        indietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                for(int i=0; i<parametri.length; i++){
-                    parametri[i]=0;
-                }
-                casellaPremio=false;
-                casellaSosta=false;
-                casellaPescaCarta=false;
-                ulterioriCarte=false;
-                dadoSingolo=false;
-                doppioSei=false;
-                lancioSingolo=false;
+        indietro.setOnMouseClicked(mouseEvent -> {
+            for(int i=0; i<parametri.length; i++){
+                parametri[i]=0;
+            }
+            casellaPremio=false;
+            casellaSosta=false;
+            casellaPescaCarta=false;
+            ulterioriCarte=false;
+            dadoSingolo=false;
+            doppioSei=false;
+            lancioSingolo=false;
 
-                actualScene = schermataIniziale(scene, stage);
-                scene.setRoot(actualScene);
+            actualScene = schermataIniziale(scene, stage);
+            scene.setRoot(actualScene);
+        });
+
+        salva.setOnMouseClicked(mouseEvent -> {
+
+            parametri[0] = (!BtestoRegolaUno.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaUno.getText()) : 0;
+
+            parametri[1] = (casellaPremio) ? 1 : 0;
+            parametri[2] = (casellaSosta) ? 1 : 0;
+            parametri[3] = (casellaPescaCarta) ? 1 : 0;
+            parametri[4] = (ulterioriCarte) ? 1 : 0;
+            parametri[5] = (dadoSingolo) ? 1 : 0;
+            parametri[6] = (doppioSei) ? 1 : 0;
+            parametri[7] = (lancioSingolo) ? 1 : 0;
+
+            parametri[8] = (!BtestoRegolaDue.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaDue.getText()) : 0;
+            parametri[9] = (!BtestoRegolaTre.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaTre.getText()) : 0;
+
+
+            parametri[10] = (!BtestoRegolaSette.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaSette.getText()) : 0;
+            parametri[11] = (!BtestoRegolaOtto.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaOtto.getText()) : 0;
+
+
+            if(casellaPremio)
+                parametri[12] = (!BtestoRegolaQuattro.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaQuattro.getText()) : 0;
+
+            if(casellaSosta)
+                parametri[13] = (!BtestoRegolaCinque.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaCinque.getText()) : 0;
+
+            if(casellaPescaCarta)
+                parametri[14] = (!BtestoRegolaSei.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaSei.getText()) : 0;
+
+            errorCheck();
+
+            FileChooser fileChooser = new FileChooser();
+
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SAVE files (*.save)", "*.save");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            File file = fileChooser.showSaveDialog(stage);
+
+            if (file != null) {
+                Partita partita = Partita.getPartita();
+                partita.inizializzaPartita();
+                partita.passaParametri(parametri);
+                partita.salvaPartita(file.getAbsolutePath());
             }
         });
 
-        salva.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
+        inizia.setOnMouseClicked(mouseEvent -> {
                 parametri[0] = (!BtestoRegolaUno.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaUno.getText()) : 0;
 
                 parametri[1] = (casellaPremio) ? 1 : 0;
@@ -548,62 +583,13 @@ public class MainWindow extends Application {
 
                 errorCheck();
 
-                FileChooser fileChooser = new FileChooser();
+                Partita partita = Partita.getPartita();
+                partita.inizializzaPartita();
+                partita.passaParametri(parametri);
+                partita.configuraPartita();
 
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SAVE files (*.save)", "*.save");
-                fileChooser.getExtensionFilters().add(extFilter);
-
-                File file = fileChooser.showSaveDialog(stage);
-
-                if (file != null) {
-                    Partita partita = Partita.getPartita();
-                    partita.inizializzaPartita();
-                    partita.passaParametri(parametri);
-                    partita.salvaPartita(file.getAbsolutePath());
-                }
-            }
-        });
-
-        inizia.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                    parametri[0] = (!BtestoRegolaUno.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaUno.getText()) : 0;
-
-                    parametri[1] = (casellaPremio) ? 1 : 0;
-                    parametri[2] = (casellaSosta) ? 1 : 0;
-                    parametri[3] = (casellaPescaCarta) ? 1 : 0;
-                    parametri[4] = (ulterioriCarte) ? 1 : 0;
-                    parametri[5] = (dadoSingolo) ? 1 : 0;
-                    parametri[6] = (doppioSei) ? 1 : 0;
-                    parametri[7] = (lancioSingolo) ? 1 : 0;
-
-                    parametri[8] = (!BtestoRegolaDue.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaDue.getText()) : 0;
-                    parametri[9] = (!BtestoRegolaTre.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaTre.getText()) : 0;
-
-
-                    parametri[10] = (!BtestoRegolaSette.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaSette.getText()) : 0;
-                    parametri[11] = (!BtestoRegolaOtto.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaOtto.getText()) : 0;
-
-
-                    if(casellaPremio)
-                        parametri[12] = (!BtestoRegolaQuattro.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaQuattro.getText()) : 0;
-
-                    if(casellaSosta)
-                        parametri[13] = (!BtestoRegolaCinque.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaCinque.getText()) : 0;
-
-                    if(casellaPescaCarta)
-                        parametri[14] = (!BtestoRegolaSei.getText().isEmpty()) ? Integer.parseInt(BtestoRegolaSei.getText()) : 0;
-
-                    errorCheck();
-
-                    Partita partita = Partita.getPartita();
-                    partita.inizializzaPartita();
-                    partita.passaParametri(parametri);
-                    partita.configuraPartita();
-
-                    actualScene = schermataGioco(scene, stage);
-                    scene.setRoot(actualScene);
-            }
+                actualScene = schermataGioco(scene, stage);
+                scene.setRoot(actualScene);
         });
 
         menuComandi.getChildren().addAll(indietro, salva, inizia);
@@ -629,22 +615,303 @@ public class MainWindow extends Application {
         VBox menuLaterale = new VBox();
         menuLaterale.setMinSize(450, 720);
 
+        menuLaterale.setSpacing(20);
+
+        Canvas canvasLg = new Canvas(420,300);
+        GraphicsContext gcLg = canvasLg.getGraphicsContext2D();
+
+        disegnaLegenda(gcLg);
+
+        TextArea testoTurno = new TextArea();
+        testoTurno.setWrapText(true);
+        testoTurno.setEditable(false);
+        testoTurno.setFocusTraversable(false);
+
+        HBox pulsanti = new HBox();
+        HBox automatico = new HBox();
+
+        pulsanti.setAlignment(Pos.CENTER);
+
+        Label labelAutomatico = new Label();
+        CheckBox turnoAutomatico = new CheckBox();
+        turnoAutomatico.setFocusTraversable(false);
+
+        labelAutomatico.setText("Turnazione Automatica");
+        automatico.setSpacing(5);
+        automatico.getChildren().addAll(turnoAutomatico, labelAutomatico);
+
+        Button avanzaTurno = new Button();
+        avanzaTurno.setText("Turno Successivo");
+        avanzaTurno.setPrefSize(150,25);
+        avanzaTurno.setFocusTraversable(false);
+
+        inizializzaGioco();
+
+        testoTurno.setText(azioneTurno);
+
+
+        pulsanti.setSpacing(50);
+        pulsanti.getChildren().addAll(automatico, avanzaTurno);
+
+        menuLaterale.getChildren().addAll(canvasLg, testoTurno, pulsanti);
+        menuLaterale.setAlignment(Pos.CENTER);
+
+
         VBox tabelloneBg = new VBox();
         tabelloneBg.setAlignment(Pos.CENTER);
 
         StackPane tabellone = new StackPane();
 
         Rectangle backGroundCanvas_0 = new Rectangle(655,655, Color.BLACK);
-        Rectangle backGroundCanvas_1 = new Rectangle(650,650, Color.ROSYBROWN);
+        Rectangle backGroundCanvas_1 = new Rectangle(654,654, Color.ROSYBROWN);
 
-        Canvas canvas = new Canvas(600,600);
-        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+        Canvas canvasTb = new Canvas(600,600);
+        GraphicsContext graphicsContextTb = canvasTb.getGraphicsContext2D();
 
-        disegnaTabellone(graphicsContext);
+        coordinateX = new double[Partita.getPartita().getImpostazioniTabellone().getRighe()*Partita.getPartita().getImpostazioniTabellone().getColonne()];
+        coordinateY = new double[Partita.getPartita().getImpostazioniTabellone().getRighe()*Partita.getPartita().getImpostazioniTabellone().getColonne()];
+
+        disegnaTabellone(graphicsContextTb, coordinateX, coordinateY);
+
+
+        double casellaX = 600 / (double) Partita.getPartita().getImpostazioniTabellone().getRighe();
+        double casellaY = 600 / (double) Partita.getPartita().getImpostazioniTabellone().getColonne();
+
+
+        graphicsContextTb.setFill(Color.DARKMAGENTA);
+        graphicsContextTb.fillRect((coordinateY[0])+(casellaY/4), coordinateX[0]+(casellaX/4), (casellaY)/2, (casellaX)/2);
+        graphicsContextTb.setFill(Color.YELLOW);
+        graphicsContextTb.fillRect((coordinateY[0])+(Partita.getPartita().getTabellone().getColonne()/2)+(casellaY/4), coordinateX[0]+(Partita.getPartita().getTabellone().getRighe()/2)+(casellaX/4), (casellaY/2)-Partita.getPartita().getTabellone().getColonne(), (casellaX/2)-Partita.getPartita().getTabellone().getRighe());
+
+
+        turnoAutomatico.selectedProperty().addListener(
+                (ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+
+
+                    avanzaTurno.setDisable(turnoAutomatico.isSelected());
+
+                    class Automatizzato extends Thread {
+
+                        private static boolean concluso = false;
+
+                        public void run(){
+
+                            while(turnoAutomatico.isSelected() && !concluso){
+                                StringBuilder stbr = new StringBuilder();
+
+                                int indiceGiocatoreAttuale = turnoAttuale % Partita.getPartita().getImpostazioniGiocatori().getNumeroGiocatori();
+                                Giocatore giocatoreAttuale = giocatori[indiceGiocatoreAttuale];
+
+                                stbr.append("TURNO "+ turnoAttuale+"; GIOCATORE "+indiceGiocatoreAttuale+"\n");
+
+                                if(giocatoreAttuale.getAttesa()<=0){
+                                    stbr.append(Partita.getPartita().getSistemaTurni().esegui(giocatoreAttuale));
+
+                                    if(giocatoreAttuale.getUsatoDivietoSosta()){
+                                        CasellaPescaUnaCartaMod.riconsegnaDivietoSosta(giocatoreAttuale);
+                                    }
+
+                                    giocatoreAttuale.setMolla(false);
+                                    giocatoreAttuale.setRigioca(false);
+
+
+                                    if(giocatoreAttuale.getHaVinto()){
+                                        concluso=true;
+                                    }
+                                }
+                                else {
+                                    if(giocatoreAttuale.getAttesa()-1==0){
+                                        stbr.append("\nGiocatore deve attendere per questo turno;");
+                                    } else {
+                                        stbr.append("\nGiocatore deve attendere per altri "+ (giocatoreAttuale.getAttesa()) +" turni;");
+                                    }
+                                    giocatoreAttuale.setAttesa(giocatoreAttuale.getAttesa() - 1);
+                                }
+
+                                azioneTurno = stbr.toString();
+
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        testoTurno.setText(azioneTurno);
+                                    }
+                                });
+
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        disegnaTabellone(graphicsContextTb, coordinateX, coordinateY);
+
+                                        double casellaX = 600 / (double) Partita.getPartita().getImpostazioniTabellone().getRighe();
+                                        double casellaY = 600 / (double) Partita.getPartita().getImpostazioniTabellone().getColonne();
+
+                                        for (int i = 0; i < giocatori.length; i++) {
+                                            double posizioneSuTabelloneX = (giocatori[i].getPosizione()!=0) ? coordinateX[giocatori[i].getPosizione()-1] : coordinateX[0];
+                                            double posizioneSuTabelloneY = (giocatori[i].getPosizione()!=0) ? coordinateY[giocatori[i].getPosizione()-1] : coordinateY[0];
+
+                                            graphicsContextTb.setFill(Color.DARKMAGENTA);
+                                            graphicsContextTb.fillRect((posizioneSuTabelloneY)+(casellaY/4), posizioneSuTabelloneX+(casellaX/4), (casellaY)/2, (casellaX)/2);
+                                            graphicsContextTb.setFill(Color.YELLOW);
+                                            graphicsContextTb.fillRect((posizioneSuTabelloneY)+(Partita.getPartita().getTabellone().getColonne()/2)+(casellaY/4), posizioneSuTabelloneX+(Partita.getPartita().getTabellone().getRighe()/2)+(casellaX/4), (casellaY/2)-Partita.getPartita().getTabellone().getColonne(), (casellaX/2)-Partita.getPartita().getTabellone().getRighe());
+                                            graphicsContextTb.setFill(Color.BLACK);
+                                            graphicsContextTb.fillText((i+1)+"",(posizioneSuTabelloneY+((casellaY)/2.25)), posizioneSuTabelloneX+((casellaX)/1.75));
+
+                                        }
+
+                                    }
+                                });
+
+                                try {
+                                    TimeUnit.SECONDS.sleep(1);
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+
+                                aggiornaTurno();
+                            }
+
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    if(concluso) {
+                                        Button indietro = new Button();
+                                        indietro.setText("Torna Al Menu Principale");
+                                        indietro.setPrefSize(150, 25);
+                                        indietro.setFocusTraversable(false);
+
+                                        indietro.setOnMouseClicked(mouseEvent2 -> {
+                                            actualScene = schermataIniziale(scene, stage);
+                                            scene.setRoot(actualScene);
+                                        });
+
+                                        menuLaterale.getChildren().add(indietro);
+
+                                        concluso=false;
+
+                                        avanzaTurno.setDisable(true);
+                                        turnoAutomatico.setSelected(false);
+                                        turnoAutomatico.setDisable(true);
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    if(turnoAutomatico.isSelected()){
+                        new Automatizzato().start();
+                    }
+
+
+                });
+
+        avanzaTurno.setOnMouseClicked(mouseEvent -> {
+
+            class Turno extends Thread {
+
+                private static boolean concluso = false;
+                public void run() {
+
+                    StringBuilder stbr = new StringBuilder();
+
+                    int indiceGiocatoreAttuale = turnoAttuale % Partita.getPartita().getImpostazioniGiocatori().getNumeroGiocatori();
+                    Giocatore giocatoreAttuale = giocatori[indiceGiocatoreAttuale];
+
+                    stbr.append("TURNO " + turnoAttuale + "; GIOCATORE " + indiceGiocatoreAttuale + "\n");
+
+                    if (giocatoreAttuale.getAttesa() <= 0) {
+                        stbr.append(Partita.getPartita().getSistemaTurni().esegui(giocatoreAttuale));
+
+                        if (giocatoreAttuale.getUsatoDivietoSosta()) {
+                            CasellaPescaUnaCartaMod.riconsegnaDivietoSosta(giocatoreAttuale);
+                        }
+
+                        giocatoreAttuale.setMolla(false);
+                        giocatoreAttuale.setRigioca(false);
+
+                        if (giocatoreAttuale.getHaVinto()) {
+                            concluso = true;
+                        }
+                    } else {
+                        if(giocatoreAttuale.getAttesa()-1==0){
+                            stbr.append("\nGiocatore deve attendere per questo turno;");
+                        } else {
+                            stbr.append("\nGiocatore deve attendere per altri "+ (giocatoreAttuale.getAttesa()) +" turni;");
+                        }
+
+                        giocatoreAttuale.setAttesa(giocatoreAttuale.getAttesa() - 1);
+                    }
+
+                    azioneTurno = stbr.toString();
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            testoTurno.setText(azioneTurno);
+                        }
+                    });
+
+                    aggiornaTurno();
+
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            disegnaTabellone(graphicsContextTb, coordinateX, coordinateY);
+
+                            double casellaX = 600 / (double) Partita.getPartita().getImpostazioniTabellone().getRighe();
+                            double casellaY = 600 / (double) Partita.getPartita().getImpostazioniTabellone().getColonne();
+
+                            for (int i = 0; i < giocatori.length; i++) {
+                                double posizioneSuTabelloneX = (giocatori[i].getPosizione()!=0) ? coordinateX[giocatori[i].getPosizione()-1] : coordinateX[0];
+                                double posizioneSuTabelloneY = (giocatori[i].getPosizione()!=0) ? coordinateY[giocatori[i].getPosizione()-1] : coordinateY[0];
+
+                                graphicsContextTb.setFill(Color.DARKMAGENTA);
+                                graphicsContextTb.fillRect((posizioneSuTabelloneY)+(casellaY/4), posizioneSuTabelloneX+(casellaX/4), (casellaY)/2, (casellaX)/2);
+                                graphicsContextTb.setFill(Color.YELLOW);
+                                graphicsContextTb.fillRect((posizioneSuTabelloneY)+(Partita.getPartita().getTabellone().getColonne()/2)+(casellaY/4), posizioneSuTabelloneX+(Partita.getPartita().getTabellone().getRighe()/2)+(casellaX/4), (casellaY/2)-Partita.getPartita().getTabellone().getColonne(), (casellaX/2)-Partita.getPartita().getTabellone().getRighe());
+                                graphicsContextTb.setFill(Color.BLACK);
+                                graphicsContextTb.fillText((i+1)+"",(posizioneSuTabelloneY+((casellaY)/2.25)), posizioneSuTabelloneX+((casellaX)/1.75));
+
+                            }
+
+                        }
+                    });
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            if (concluso) {
+                                Button indietro = new Button();
+                                indietro.setText("Torna Al Menu Principale");
+                                indietro.setPrefSize(150, 25);
+                                indietro.setFocusTraversable(false);
+
+                                indietro.setOnMouseClicked(mouseEvent2 -> {
+                                    actualScene = schermataIniziale(scene, stage);
+                                    scene.setRoot(actualScene);
+                                });
+
+                                menuLaterale.getChildren().add(indietro);
+
+                                concluso = false;
+                                avanzaTurno.setDisable(true);
+                                turnoAutomatico.setSelected(false);
+                                turnoAutomatico.setDisable(true);
+                            }
+                        }
+                    });
+                }
+            }
+
+            new Turno().start();
+        });
 
         tabellone.setAlignment(Pos.CENTER);
 
-        tabellone.getChildren().addAll(backGroundCanvas_0, backGroundCanvas_1, canvas);
+        tabellone.getChildren().addAll(backGroundCanvas_0, backGroundCanvas_1, canvasTb);
         tabelloneBg.getChildren().add(tabellone);
 
         root.getChildren().add(menuLaterale);
@@ -655,7 +922,96 @@ public class MainWindow extends Application {
         return content;
     }
 
-    private static void disegnaTabellone(GraphicsContext gc) {
+    private static void disegnaLegenda(GraphicsContext gc){
+
+        //Base Legenda
+
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0, 420, 300);
+        gc.setFill(Color.WHITE);
+        gc.fillRect(1,1, 418, 298);
+
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0, 420, 300);
+        gc.setFill(Color.WHITE);
+        gc.fillRect(1,1, 418, 298);
+
+
+
+        //Scale
+        gc.setFill(Color.BLACK);
+        gc.fillRect(30,20, 45, 45);
+        gc.setFill(Color.LIGHTGRAY);
+        gc.fillRect(31,21, 43, 43);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("SCALE", 90, 45);
+
+        //Serpenti
+        gc.setFill(Color.BLACK);
+        gc.fillRect(30,80, 45, 45);
+        gc.setFill(Color.LIGHTGREEN);
+        gc.fillRect(31,81, 43, 43);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("SERPENTI", 90, 60+45);
+
+
+
+        //Dadi
+        gc.setFill(Color.BLACK);
+        gc.fillRect(30,180, 45, 45);
+        gc.setFill(Color.LIGHTPINK);
+        gc.fillRect(31,181, 43, 43);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("DADO", 90, 160+45);
+
+        //Molla
+        gc.setFill(Color.BLACK);
+        gc.fillRect(30,240, 45, 45);
+        gc.setFill(Color.LIGHTSALMON);
+        gc.fillRect(31,241, 43, 43);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("MOLLA", 90, 220+45);
+
+
+
+        //Panchina
+        gc.setFill(Color.BLACK);
+        gc.fillRect(230,20, 45, 45);
+        gc.setFill(Color.LIGHTCYAN);
+        gc.fillRect(231,21, 43, 43);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("PANCHINA", 200+90, 45);
+
+        //Locanda
+        gc.setFill(Color.BLACK);
+        gc.fillRect(230,80, 45, 45);
+        gc.setFill(Color.LIGHTBLUE);
+        gc.fillRect(231,81, 43, 43);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("LOCANDA", 200+90, 60+45);
+
+
+
+        //Pesca una Carta
+        gc.setFill(Color.BLACK);
+        gc.fillRect(230,180, 45, 45);
+        gc.setFill(Color.ORANGE);
+        gc.fillRect(231,181, 43, 43);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("PESCA UNA CARTA", 200+90, 160+45);
+
+
+        gc.stroke();
+    }
+
+    private static void disegnaTabellone(GraphicsContext gc, double[] x, double[] y) {
         gc.rect(0,0,600, 600);
 
         gc.setFill(Color.BEIGE);
@@ -663,8 +1019,8 @@ public class MainWindow extends Application {
 
         TabelloneIF tabellone = Partita.getPartita().getTabellone();
 
-        int righe = Partita.getPartita().getimpostazioniTabellone().getRighe();
-        int colonne = Partita.getPartita().getimpostazioniTabellone().getColonne();
+        int righe = Partita.getPartita().getImpostazioniTabellone().getRighe();
+        int colonne = Partita.getPartita().getImpostazioniTabellone().getColonne();
 
         double casellaX = 600 / (double) righe;
         double casellaY = 600 / (double) colonne;
@@ -679,6 +1035,9 @@ public class MainWindow extends Application {
                         double v1 = (double) (i) * (casellaX);
                         double v2 = casellaY;
                         double v3 = casellaX;
+
+                        x[posizione-1] = v1;
+                        y[posizione-1] = v;
 
                         if (tabellone.getCasella(posizione) instanceof CasellaScala) {
                             gc.setFill(Color.LIGHTGRAY);
@@ -725,6 +1084,9 @@ public class MainWindow extends Application {
                     double v2 = (double) casellaY;
                     double v3 = (double) casellaX;
 
+                    x[posizione-1] = v1;
+                    y[posizione-1] = v;
+
                     if (tabellone.getCasella(posizione) instanceof CasellaScala) {
                         gc.setFill(Color.LIGHTGRAY);
                         gc.fillRect(v, v1, v2, v3);
@@ -766,8 +1128,6 @@ public class MainWindow extends Application {
 
         gc.stroke();
     }
-
-
 
     private static void errorCheck(){
         StringBuilder errorLog = new StringBuilder();
@@ -881,4 +1241,33 @@ public class MainWindow extends Application {
             throw new IllegalArgumentException(errorLog.toString());
         }
     }
+
+
+
+    private static double[] coordinateX;
+    private static double[] coordinateY;
+
+    private static Giocatore[] giocatori;
+    private static int turnoAttuale;
+    private static String azioneTurno;
+
+    private static void inizializzaGioco(){
+        giocatori = new Giocatore[Partita.getPartita().getImpostazioniGiocatori().getNumeroGiocatori()];
+        for(int i = 0; i<giocatori.length; i++){
+            giocatori[i] = new Giocatore();
+        }
+
+        turnoAttuale = 0;
+        azioneTurno = "INIZIO PARTITA";
+    }
+
+    private static void aggiornaTurno(){
+        turnoAttuale++;
+
+        //Aggiornare disegno giocatori;
+    }
 }
+
+
+
+

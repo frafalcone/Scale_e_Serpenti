@@ -203,25 +203,38 @@ public class Partita {
         }
     }
 
-    public ImpostazioniRegole getimpostazioniRegole() {
+    public void settaTurnoAutomatico(boolean automatico){
+        if(automatico){
+            sistemaTurni.setAutomatizza(true);
+        } else {
+            sistemaTurni.setAutomatizza(false);
+        }
+    }
+
+    public ImpostazioniRegole getImpostazioniRegole() {
         return impostazioniRegole;
     }
 
-    public ImpostazioniCaselle getimpostazioniCaselle() {
+    public ImpostazioniCaselle getImpostazioniCaselle() {
         return impostazioniCaselle;
     }
 
-    public ImpostazioniTabellone getimpostazioniTabellone() {
+    public ImpostazioniTabellone getImpostazioniTabellone() {
         return impostazioniTabellone;
     }
 
-    public ImpostazioniGiocatori getimpostazioniGiocatori() {
+    public ImpostazioniGiocatori getImpostazioniGiocatori() {
         return impostazioniGiocatori;
     }
 
     public TabelloneIF getTabellone(){
         return tabellone;
     }
+
+    public TurnoIF getSistemaTurni(){
+        return sistemaTurni;
+    }
+
 
 
     private void giocaDaTerminale(){
