@@ -78,11 +78,16 @@ public class MainWindow extends Application {
         Button carica = new Button();
         carica.setText("Carica Configurazione");
 
+        Button esci = new Button();
+        esci.setText("Esci");
+
         nuova.setPrefSize(150,25);
         carica.setPrefSize(150, 25);
+        esci.setPrefSize(150, 25);
 
         nuova.setFocusTraversable(false);
         carica.setFocusTraversable(false);
+        esci.setFocusTraversable(false);
 
         nuova.setOnMouseClicked(mouseEvent -> {
             actualScene = schermataCreazione(scene, stage);
@@ -107,9 +112,11 @@ public class MainWindow extends Application {
             }
         });
 
+        esci.setOnMouseClicked(mouseEvent -> {
+            Platform.exit();
+        });
 
-        root.getChildren().add(nuova);
-        root.getChildren().add(carica);
+        root.getChildren().addAll(nuova, carica, esci);
 
         Parent content = root;
 
@@ -961,7 +968,7 @@ public class MainWindow extends Application {
         //Dadi
         gc.setFill(Color.BLACK);
         gc.fillRect(30,180, 45, 45);
-        gc.setFill(Color.LIGHTPINK);
+        gc.setFill(Color.LIGHTSALMON);
         gc.fillRect(31,181, 43, 43);
 
         gc.setFill(Color.BLACK);
@@ -970,7 +977,7 @@ public class MainWindow extends Application {
         //Molla
         gc.setFill(Color.BLACK);
         gc.fillRect(30,240, 45, 45);
-        gc.setFill(Color.LIGHTSALMON);
+        gc.setFill(Color.LIGHTPINK);
         gc.fillRect(31,241, 43, 43);
 
         gc.setFill(Color.BLACK);
@@ -1094,10 +1101,10 @@ public class MainWindow extends Application {
                         gc.setFill(Color.LIGHTGREEN);
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaDadi) {
-                        gc.setFill(Color.PINK);
+                        gc.setFill(Color.LIGHTSALMON);
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaMolla) {
-                        gc.setFill(Color.LIGHTSALMON);
+                        gc.setFill(Color.LIGHTPINK);
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaPanchina) {
                         gc.setFill(Color.LIGHTCYAN);

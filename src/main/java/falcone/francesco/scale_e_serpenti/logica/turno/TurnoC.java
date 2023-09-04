@@ -27,9 +27,20 @@ public class TurnoC extends TurnoAb{
 
         stbr.append(muovi(giocatore, risultatoDadi));
 
+        if(giocatore.getScala()){
+            giocatore.setScala(false);
+            stbr.append(muovi(giocatore, 0));
+        }
+
+        if(giocatore.getSerpente()){
+            giocatore.setSerpente(false);
+            stbr.append(muovi(giocatore, 0));
+        }
+
         if(giocatore.getHaVinto()){
             return stbr.toString();
         }
+
 
         stbr.append(molla(giocatore, risultatoDadi));
         stbr.append(rigioca(giocatore));

@@ -22,6 +22,7 @@ public class CasellaSerpente extends CasellaDecorator{
     private String comportamentoAggiunto(Giocatore giocatore) {
         int posizionePrecedente = giocatore.getPosizione();
         giocatore.setPosizione(destinazione);
+        giocatore.setSerpente(true);
         return "\nGiocatore arriva su un Serpente, posizione: "+ posizionePrecedente +";"
          +"\nGiocatore scivola dal Serpente, posizione: "+ giocatore.getPosizione();
     }

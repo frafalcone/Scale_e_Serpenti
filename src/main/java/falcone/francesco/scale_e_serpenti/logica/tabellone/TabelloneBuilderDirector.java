@@ -17,10 +17,6 @@ public class TabelloneBuilderDirector {
 
         builder.setTraguardo();
 
-        builder.buildSerpenti();
-
-        builder.buildScale();
-
         if(impostazioniCaselle.getCasellaPremio()){
             builder.buildCasellaPremio();
         }
@@ -34,6 +30,10 @@ public class TabelloneBuilderDirector {
         } else if(impostazioniCaselle.getCasellaPescaUnaCarta()){
             builder.buildCasellaPescaUnaCarta();
         }
+
+        builder.buildSerpenti();
+
+        builder.buildScale();
     }
 
 }

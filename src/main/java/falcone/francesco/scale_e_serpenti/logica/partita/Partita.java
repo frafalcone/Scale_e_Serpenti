@@ -514,7 +514,7 @@ public class Partita {
 
     }
 
-    public void gameInitAndLoopTerminale(){
+    private void gameInitAndLoopTerminale(){
 
         boolean finito = false;
         int turno = 0;
