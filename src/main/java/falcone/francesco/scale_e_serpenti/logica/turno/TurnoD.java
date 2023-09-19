@@ -22,15 +22,6 @@ public class TurnoD extends TurnoAb{
 
         stbr.append(muovi(giocatore, risultatoDadi));
 
-        if(giocatore.getScala()){
-            giocatore.setScala(false);
-            stbr.append(muovi(giocatore, 0));
-        }
-
-        if(giocatore.getSerpente()){
-            giocatore.setSerpente(false);
-            stbr.append(muovi(giocatore, 0));
-        }
 
         if(giocatore.getHaVinto()){
             return stbr.toString();

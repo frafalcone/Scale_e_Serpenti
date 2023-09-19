@@ -41,7 +41,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
             while(!posizionato){
                 indiceTestaSerpente = random.nextInt(2, dimensione);
                 indiceCodaSerpente = random.nextInt(1, indiceTestaSerpente);
-                if(!tabellone.getCasella(indiceTestaSerpente).getAssegnata() || !tabellone.getCasella(indiceCodaSerpente).getAssegnata()){
+                if(!tabellone.getCasella(indiceTestaSerpente).getAssegnata() && !tabellone.getCasella(indiceCodaSerpente).getAssegnata()){
                     CasellaIF casella = new CasellaSerpente(tabellone.getCasella(indiceTestaSerpente), indiceCodaSerpente);
                     if(casella.getIndiceCasella()==-1)
                         break;
@@ -85,7 +85,7 @@ public class TabelloneBuilder implements TabelloneBuilderIF{
                     posizionato = true;
                     traguardoAssegnato = true;
                 }
-                else if(!tabellone.getCasella(indiceFineScala).getAssegnata() || !tabellone.getCasella(indiceBaseScala).getAssegnata()){
+                else if(!tabellone.getCasella(indiceFineScala).getAssegnata() && !tabellone.getCasella(indiceBaseScala).getAssegnata()){
                     CasellaIF casella = new CasellaScala(tabellone.getCasella(indiceBaseScala), indiceFineScala);
                     if(casella.getIndiceCasella()==-1)
                         break;

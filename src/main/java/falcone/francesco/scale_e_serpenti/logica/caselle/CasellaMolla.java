@@ -18,7 +18,7 @@ public class CasellaMolla extends CasellaDecorator{
 
     private String comportamentoAggiunto(Giocatore giocatore) {
         giocatore.setMolla(true);
-        return "\nGiocatore arriva su una molla;";
+        return "\nGiocatore arriva su una Molla;";
     }
 
 }

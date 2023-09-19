@@ -25,7 +25,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 
@@ -685,9 +684,9 @@ public class MainWindow extends Application {
         double casellaY = 600 / (double) Partita.getPartita().getImpostazioniTabellone().getColonne();
 
 
-        graphicsContextTb.setFill(Color.DARKMAGENTA);
+        graphicsContextTb.setFill(Color.BLACK);
         graphicsContextTb.fillRect((coordinateY[0])+(casellaY/4), coordinateX[0]+(casellaX/4), (casellaY)/2, (casellaX)/2);
-        graphicsContextTb.setFill(Color.YELLOW);
+        graphicsContextTb.setFill(Color.DARKGRAY);
         graphicsContextTb.fillRect((coordinateY[0])+(Partita.getPartita().getTabellone().getColonne()/2)+(casellaY/4), coordinateX[0]+(Partita.getPartita().getTabellone().getRighe()/2)+(casellaX/4), (casellaY/2)-Partita.getPartita().getTabellone().getColonne(), (casellaX/2)-Partita.getPartita().getTabellone().getRighe());
 
 
@@ -756,9 +755,9 @@ public class MainWindow extends Application {
                                             double posizioneSuTabelloneX = (giocatori[i].getPosizione()!=0) ? coordinateX[giocatori[i].getPosizione()-1] : coordinateX[0];
                                             double posizioneSuTabelloneY = (giocatori[i].getPosizione()!=0) ? coordinateY[giocatori[i].getPosizione()-1] : coordinateY[0];
 
-                                            graphicsContextTb.setFill(Color.DARKMAGENTA);
+                                            graphicsContextTb.setFill(Color.BLACK);
                                             graphicsContextTb.fillRect((posizioneSuTabelloneY)+(casellaY/4), posizioneSuTabelloneX+(casellaX/4), (casellaY)/2, (casellaX)/2);
-                                            graphicsContextTb.setFill(Color.YELLOW);
+                                            graphicsContextTb.setFill(Color.DARKGRAY);
                                             graphicsContextTb.fillRect((posizioneSuTabelloneY)+(Partita.getPartita().getTabellone().getColonne()/2)+(casellaY/4), posizioneSuTabelloneX+(Partita.getPartita().getTabellone().getRighe()/2)+(casellaX/4), (casellaY/2)-Partita.getPartita().getTabellone().getColonne(), (casellaX/2)-Partita.getPartita().getTabellone().getRighe());
                                             graphicsContextTb.setFill(Color.BLACK);
                                             graphicsContextTb.fillText((i)+"",(posizioneSuTabelloneY+((casellaY)/2.25)), posizioneSuTabelloneX+((casellaX)/1.75));
@@ -874,9 +873,9 @@ public class MainWindow extends Application {
                                 double posizioneSuTabelloneX = (giocatori[i].getPosizione()!=0) ? coordinateX[giocatori[i].getPosizione()-1] : coordinateX[0];
                                 double posizioneSuTabelloneY = (giocatori[i].getPosizione()!=0) ? coordinateY[giocatori[i].getPosizione()-1] : coordinateY[0];
 
-                                graphicsContextTb.setFill(Color.DARKMAGENTA);
+                                graphicsContextTb.setFill(Color.BLACK);
                                 graphicsContextTb.fillRect((posizioneSuTabelloneY)+(casellaY/4), posizioneSuTabelloneX+(casellaX/4), (casellaY)/2, (casellaX)/2);
-                                graphicsContextTb.setFill(Color.YELLOW);
+                                graphicsContextTb.setFill(Color.WHITE);
                                 graphicsContextTb.fillRect((posizioneSuTabelloneY)+(Partita.getPartita().getTabellone().getColonne()/2)+(casellaY/4), posizioneSuTabelloneX+(Partita.getPartita().getTabellone().getRighe()/2)+(casellaX/4), (casellaY/2)-Partita.getPartita().getTabellone().getColonne(), (casellaX/2)-Partita.getPartita().getTabellone().getRighe());
                                 graphicsContextTb.setFill(Color.BLACK);
                                 graphicsContextTb.fillText((i)+"",(posizioneSuTabelloneY+((casellaY)/2.25)), posizioneSuTabelloneX+((casellaX)/1.75));
@@ -948,7 +947,7 @@ public class MainWindow extends Application {
         //Scale
         gc.setFill(Color.BLACK);
         gc.fillRect(30,20, 45, 45);
-        gc.setFill(Color.LIGHTGRAY);
+        gc.setFill(Color.rgb(176,161,186));
         gc.fillRect(31,21, 43, 43);
 
         gc.setFill(Color.BLACK);
@@ -957,7 +956,7 @@ public class MainWindow extends Application {
         //Serpenti
         gc.setFill(Color.BLACK);
         gc.fillRect(30,80, 45, 45);
-        gc.setFill(Color.LIGHTGREEN);
+        gc.setFill(Color.rgb(155,197,61));
         gc.fillRect(31,81, 43, 43);
 
         gc.setFill(Color.BLACK);
@@ -968,7 +967,7 @@ public class MainWindow extends Application {
         //Dadi
         gc.setFill(Color.BLACK);
         gc.fillRect(30,180, 45, 45);
-        gc.setFill(Color.LIGHTSALMON);
+        gc.setFill(Color.rgb(195,66,63));
         gc.fillRect(31,181, 43, 43);
 
         gc.setFill(Color.BLACK);
@@ -977,7 +976,7 @@ public class MainWindow extends Application {
         //Molla
         gc.setFill(Color.BLACK);
         gc.fillRect(30,240, 45, 45);
-        gc.setFill(Color.LIGHTPINK);
+        gc.setFill(Color.rgb(249,160,63));
         gc.fillRect(31,241, 43, 43);
 
         gc.setFill(Color.BLACK);
@@ -988,7 +987,7 @@ public class MainWindow extends Application {
         //Panchina
         gc.setFill(Color.BLACK);
         gc.fillRect(230,20, 45, 45);
-        gc.setFill(Color.LIGHTCYAN);
+        gc.setFill(Color.rgb(95,191,249));
         gc.fillRect(231,21, 43, 43);
 
         gc.setFill(Color.BLACK);
@@ -997,7 +996,7 @@ public class MainWindow extends Application {
         //Locanda
         gc.setFill(Color.BLACK);
         gc.fillRect(230,80, 45, 45);
-        gc.setFill(Color.LIGHTBLUE);
+        gc.setFill(Color.rgb(72,86,150));
         gc.fillRect(231,81, 43, 43);
 
         gc.setFill(Color.BLACK);
@@ -1008,11 +1007,21 @@ public class MainWindow extends Application {
         //Pesca una Carta
         gc.setFill(Color.BLACK);
         gc.fillRect(230,180, 45, 45);
-        gc.setFill(Color.ORANGE);
+        gc.setFill(Color.rgb(210,149,191));
         gc.fillRect(231,181, 43, 43);
 
         gc.setFill(Color.BLACK);
         gc.fillText("PESCA UNA CARTA", 200+90, 160+45);
+
+
+        //Neutra
+        gc.setFill(Color.BLACK);
+        gc.fillRect(230,240, 45, 45);
+        gc.setFill(Color.rgb(232,225,239));
+        gc.fillRect(231,241, 43, 43);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("CASELLA NEUTRA", 200+90, 220+45);
 
 
         gc.stroke();
@@ -1021,7 +1030,7 @@ public class MainWindow extends Application {
     private static void disegnaTabellone(GraphicsContext gc, double[] x, double[] y) {
         gc.rect(0,0,600, 600);
 
-        gc.setFill(Color.BEIGE);
+        gc.setFill(Color.rgb(232,225,239));
         gc.fillRect(0, 0, 600, 600);
 
         TabelloneIF tabellone = Partita.getPartita().getTabellone();
@@ -1047,31 +1056,31 @@ public class MainWindow extends Application {
                         y[posizione-1] = v;
 
                         if (tabellone.getCasella(posizione) instanceof CasellaScala) {
-                            gc.setFill(Color.LIGHTGRAY);
+                            gc.setFill(Color.rgb(176,161,186));
                             gc.fillRect(v, v1, v2, v3);
                         } else if (tabellone.getCasella(posizione) instanceof CasellaSerpente) {
-                            gc.setFill(Color.LIGHTGREEN);
+                            gc.setFill(Color.rgb(155,197,61));
                             gc.fillRect(v, v1, v2, v3);
                         } else if (tabellone.getCasella(posizione) instanceof CasellaDadi) {
-                            gc.setFill(Color.LIGHTSALMON);
+                            gc.setFill(Color.rgb(195,66,63));
                             gc.fillRect(v, v1, v2, v3);
                         } else if (tabellone.getCasella(posizione) instanceof CasellaMolla) {
-                            gc.setFill(Color.LIGHTPINK);
+                            gc.setFill(Color.rgb(249,160,63));
                             gc.fillRect(v, v1, v2, v3);
                         } else if (tabellone.getCasella(posizione) instanceof CasellaPanchina) {
-                            gc.setFill(Color.LIGHTCYAN);
+                            gc.setFill(Color.rgb(95,191,249));
                             gc.fillRect(v, v1, v2, v3);
                         } else if (tabellone.getCasella(posizione) instanceof CasellaLocanda) {
-                            gc.setFill(Color.LIGHTBLUE);
+                            gc.setFill(Color.rgb(72,86,150));
                             gc.fillRect(v, v1, v2, v3);
                         } else if (tabellone.getCasella(posizione) instanceof CasellaPescaUnaCarta || tabellone.getCasella(posizione) instanceof CasellaPescaUnaCartaMod) {
-                            gc.setFill(Color.ORANGE);
+                            gc.setFill(Color.rgb(210,149,191));
                             gc.fillRect(v, v1, v2, v3);
                         } else if (tabellone.getCasella(posizione) instanceof CasellaTraguardo) {
-                            gc.setFill(Color.WHITE);
+                            gc.setFill(Color.rgb(107,5,4));
                             gc.fillRect(v, v1, v2, v3);
                         } else if (posizione == 1) {
-                            gc.setFill(Color.LIGHTSLATEGRAY);
+                            gc.setFill(Color.rgb(232,225,239));
                             gc.fillRect(v, v1, v2, v3);
                         }
 
@@ -1095,33 +1104,34 @@ public class MainWindow extends Application {
                     y[posizione-1] = v;
 
                     if (tabellone.getCasella(posizione) instanceof CasellaScala) {
-                        gc.setFill(Color.LIGHTGRAY);
+                        gc.setFill(Color.rgb(176,161,186));
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaSerpente) {
-                        gc.setFill(Color.LIGHTGREEN);
+                        gc.setFill(Color.rgb(155,197,61));
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaDadi) {
-                        gc.setFill(Color.LIGHTSALMON);
+                        gc.setFill(Color.rgb(195,66,63));
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaMolla) {
-                        gc.setFill(Color.LIGHTPINK);
+                        gc.setFill(Color.rgb(249,160,63));
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaPanchina) {
-                        gc.setFill(Color.LIGHTCYAN);
+                        gc.setFill(Color.rgb(95,191,249));
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaLocanda) {
-                        gc.setFill(Color.LIGHTBLUE);
+                        gc.setFill(Color.rgb(72,86,150));
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaPescaUnaCarta || tabellone.getCasella(posizione) instanceof CasellaPescaUnaCartaMod) {
-                        gc.setFill(Color.ORANGE);
+                        gc.setFill(Color.rgb(210,149,191));
                         gc.fillRect(v, v1, v2, v3);
                     } else if (tabellone.getCasella(posizione) instanceof CasellaTraguardo) {
-                        gc.setFill(Color.WHITE);
+                        gc.setFill(Color.rgb(107,5,4));
                         gc.fillRect(v, v1, v2, v3);
                     } else if (posizione == 1) {
-                        gc.setFill(Color.LIGHTSLATEGRAY);
+                        gc.setFill(Color.rgb(232,225,239));
                         gc.fillRect(v, v1, v2, v3);
                     }
+
 
                     gc.setFill(Color.BLACK);
 
@@ -1270,8 +1280,6 @@ public class MainWindow extends Application {
 
     private static void aggiornaTurno(){
         turnoAttuale++;
-
-        //Aggiornare disegno giocatori;
     }
 }
 

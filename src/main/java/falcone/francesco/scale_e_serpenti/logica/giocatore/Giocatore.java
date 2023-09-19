@@ -7,8 +7,6 @@ public class Giocatore {
     private boolean rigioca;
     private boolean haVinto;
     private boolean molla;
-    private boolean scala;
-    private boolean serpente;
     private boolean usatoDivietoSosta;
 
     public Giocatore() {
@@ -18,8 +16,6 @@ public class Giocatore {
         usatoDivietoSosta = false;
         rigioca = false;
         haVinto = false;
-        serpente = false;
-        scala = false;
     }
 
 
@@ -43,14 +39,6 @@ public class Giocatore {
         return rigioca;
     }
 
-    public boolean getSerpente() {
-        return serpente;
-    }
-
-    public boolean getScala() {
-        return scala;
-    }
-
     public boolean getHaVinto() {
         return haVinto;
     }
@@ -61,14 +49,6 @@ public class Giocatore {
 
     public void setPosizione(int posizione) {
         this.posizione = posizione;
-    }
-
-    public void setScala(boolean scala) {
-        this.scala = scala;
-    }
-
-    public void setSerpente(boolean serpente) {
-        this.serpente = serpente;
     }
 
     public void setAttesa(int turni) {
