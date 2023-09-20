@@ -1,4 +1,4 @@
-package falcone.francesco.scale_e_serpenti.Grafica;
+package falcone.francesco.scale_e_serpenti.grafica;
 
 import falcone.francesco.scale_e_serpenti.logica.caselle.*;
 import falcone.francesco.scale_e_serpenti.logica.giocatore.Giocatore;
