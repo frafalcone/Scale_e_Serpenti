@@ -1159,7 +1159,10 @@ public class MainWindow extends Application {
                 case 0 -> {
                     if(parametri[i]<=0){
                         errorFound=true;
-                        errorLog.append("* Il numero di giocatori deve essere maggiore di 0;\n");
+                        errorLog.append("* Il numero di giocatori deve essere compreso tra 1 e 5;\n");
+                    } else if(parametri[i]>5){
+                        errorFound=true;
+                        errorLog.append("* Il numero di giocatori deve essere compreso tra 1 e 5;\n");
                     }
                 }
                 case 8 -> {
